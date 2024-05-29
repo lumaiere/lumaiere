@@ -5,6 +5,9 @@ body {
     text-align: center;
     background-color: #f5f5f5;
     color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes up at least the full height of the viewport */
 }
 
 header {
@@ -53,7 +56,7 @@ section {
 }
 
 #home .overlay {
-    background: rgba(0, 0, 0, 0.6); /* Adjust this value for more/less transparency */
+    background: rgba(0, 0, 0, 0.6);
     padding: 2rem;
     border-radius: 10px;
     display: inline-block;
@@ -94,7 +97,6 @@ footer {
     background-color: #444;
     color: white;
     padding: 1rem;
-    position: fixed;
     width: 100%;
-    bottom: 0;
+    margin-top: auto; /* Push the footer to the bottom */
 }
