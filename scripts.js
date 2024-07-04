@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (loadedImages === artFiles.length) {
                     // All images preloaded, start the display loop
                     showNextImage();
-                    intervalId = setInterval(nextImage, 2000);
+                    intervalId = setInterval(nextImage, 4000);
                 }
             };
             img.onerror = function() {
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (loadedImages === artFiles.length) {
                     // All images preloaded, start the display loop
                     showNextImage();
-                    intervalId = setInterval(nextImage, 2000);
+                    intervalId = setInterval(nextImage, 4000);
                 }
             };
         });
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         setTimeout(() => {
             showNextImage();
-        }, 500);
+        }, 2000);
     }
 
     function loadGallery() {
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         setTimeout(() => {
             isClicked = false;
-            intervalId = setInterval(nextImage, 2000);
+            intervalId = setInterval(nextImage, 4000);
         }, duration);
     }
 
