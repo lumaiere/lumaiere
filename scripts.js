@@ -1,37 +1,45 @@
 document.addEventListener("DOMContentLoaded", function() {
     const artDisplay = document.getElementById("art-display");
     const galleryView = document.getElementById("gallery-view");
-    
-    // Generate an array of 100 art file names
-    const artFiles = Array.from({length: 100}, (_, i) => `art${i + 1}.jpg`);
 
     let currentIndex = 0;
     let intervalId;
     let isClicked = false;
-    const validArtFiles = [];
+    let validArtFiles = [];
 
     function preloadImages() {
-        let loadedImages = 0;
-        artFiles.forEach(file => {
+        fetchArtFiles()
+            .then(files => {
+                validArtFiles = files.filter(file => file.match(/^art\d+\.jpg$/i));
+                return Promise.all(validArtFiles.map(file => loadImage(file)));
+            })
+            .then(() => {
+                showNextImage();
+                intervalId = setInterval(nextImage, 4000);
+            })
+            .catch(error => console.error('Error loading images:', error));
+    }
+
+    function fetchArtFiles() {
+        return new Promise((resolve, reject) => {
+            fetch('./')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const links = Array.from(doc.querySelectorAll('a')).map(a => a.getAttribute('href'));
+                    resolve(links);
+                })
+                .catch(error => reject(error));
+        });
+    }
+
+    function loadImage(src) {
+        return new Promise((resolve, reject) => {
             const img = new Image();
-            img.src = file;
-            img.onload = function() {
-                validArtFiles.push(file);
-                loadedImages++;
-                if (loadedImages === artFiles.length) {
-                    // All images preloaded, start the display loop
-                    showNextImage();
-                    intervalId = setInterval(nextImage, 4000);
-                }
-            };
-            img.onerror = function() {
-                loadedImages++;
-                if (loadedImages === artFiles.length) {
-                    // All images preloaded, start the display loop
-                    showNextImage();
-                    intervalId = setInterval(nextImage, 4000);
-                }
-            };
+            img.src = src;
+            img.onload = () => resolve(img);
+            img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
         });
     }
 
