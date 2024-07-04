@@ -4,20 +4,44 @@ document.addEventListener("DOMContentLoaded", function() {
     galleryView.id = "gallery-view";
     document.body.appendChild(galleryView);
     
-    const header = document.querySelector("header");
-
     // Generate an array of 100 art file names
     const artFiles = Array.from({length: 100}, (_, i) => `art${i + 1}.jpg`);
 
     let currentIndex = 0;
     let intervalId;
     let isClicked = false;
+    const validArtFiles = [];
+
+    function preloadImages() {
+        let loadedImages = 0;
+        artFiles.forEach(file => {
+            const img = new Image();
+            img.src = file;
+            img.onload = function() {
+                validArtFiles.push(file);
+                loadedImages++;
+                if (loadedImages === artFiles.length) {
+                    // All images preloaded, start the display loop
+                    showNextImage();
+                    intervalId = setInterval(nextImage, 2000);
+                }
+            };
+            img.onerror = function() {
+                loadedImages++;
+                if (loadedImages === artFiles.length) {
+                    // All images preloaded, start the display loop
+                    showNextImage();
+                    intervalId = setInterval(nextImage, 2000);
+                }
+            };
+        });
+    }
 
     function showNextImage() {
         if (isClicked) return;
 
         const img = new Image();
-        img.src = artFiles[currentIndex];
+        img.src = validArtFiles[currentIndex];
         img.classList.add('fade'); // Add class for fade effect
 
         img.onload = function() {
@@ -28,12 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }, 100);
         };
 
-        img.onerror = function() {
-            currentIndex = (currentIndex + 1) % artFiles.length;
-            showNextImage();
-        };
-
-        currentIndex = (currentIndex + 1) % artFiles.length;
+        currentIndex = (currentIndex + 1) % validArtFiles.length;
     }
 
     function nextImage() {
@@ -48,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function loadGallery() {
-        artFiles.forEach((file, index) => {
+        validArtFiles.forEach((file, index) => {
             const img = new Image();
             img.src = file;
             img.alt = `Artwork ${index + 1}`;
@@ -93,17 +112,16 @@ document.addEventListener("DOMContentLoaded", function() {
         }, duration);
     }
 
+    preloadImages();
     loadGallery();
-    showNextImage();
-    intervalId = setInterval(nextImage, 2000);
 
     window.addEventListener('scroll', function() {
-        if (window.scrollY > window.innerHeight) {
-            header.style.display = 'flex';
-            galleryView.style.display = 'flex';
+        if (window.scrollY > 0) {
+            artDisplay.style.opacity = '0';
+            galleryView.style.opacity = '1';
         } else {
-            header.style.display = 'none';
-            galleryView.style.display = 'none';
+            artDisplay.style.opacity = '1';
+            galleryView.style.opacity = '0';
         }
     });
 
