@@ -116,27 +116,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.addEventListener('scroll', function() {
         const scrollTop = window.scrollY;
-        const galleryOffset = galleryView.offsetTop;
-        const galleryHeight = galleryView.offsetHeight;
-    
+
         if (scrollTop > 0) {
-            // User scrolled down, display the gallery and hide the main art display
+            // Scrolled down, show gallery view and hide art display
             galleryView.style.opacity = '1';
             artDisplay.style.opacity = '0';
         } else {
-            // User at the top of the page, display the main art display and hide the gallery
+            // At the top, show art display and hide gallery view
             galleryView.style.opacity = '0';
             artDisplay.style.opacity = '1';
         }
     });
-    
 
     window.addEventListener('resize', function() {
         if (window.innerHeight < window.innerWidth) {
-            // Landscape
+            // Landscape orientation
             artDisplay.style.flexDirection = 'row';
         } else {
-            // Portrait
+            // Portrait orientation
             artDisplay.style.flexDirection = 'column';
         }
     });
