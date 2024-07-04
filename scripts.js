@@ -1,61 +1,109 @@
 document.addEventListener("DOMContentLoaded", function() {
     const artDisplay = document.getElementById("art-display");
+    const galleryView = document.createElement('div');
+    galleryView.id = "gallery-view";
+    document.body.appendChild(galleryView);
+    
     const header = document.querySelector("header");
 
     // Generate an array of 100 art file names
     const artFiles = Array.from({length: 100}, (_, i) => `art${i + 1}.jpg`);
 
     let currentIndex = 0;
+    let intervalId;
+    let isClicked = false;
 
     function showNextImage() {
-        // Check if the current image exists
+        if (isClicked) return;
+
         const img = new Image();
         img.src = artFiles[currentIndex];
         img.classList.add('fade'); // Add class for fade effect
 
         img.onload = function() {
-            // If the image loads successfully, display it
             artDisplay.innerHTML = '';
             artDisplay.appendChild(img);
             setTimeout(() => {
                 img.style.opacity = '1'; // Fade in the image
-            }, 100); // Delay to ensure image is in DOM
+            }, 100);
         };
 
         img.onerror = function() {
-            // If the image fails to load, move to the next one immediately
             currentIndex = (currentIndex + 1) % artFiles.length;
             showNextImage();
         };
 
-        // Update the index for the next image
         currentIndex = (currentIndex + 1) % artFiles.length;
     }
 
     function nextImage() {
-        // Fade out the current image
         const currentImg = artDisplay.querySelector('img');
         if (currentImg) {
             currentImg.style.opacity = '0';
         }
         
         setTimeout(() => {
-            showNextImage(); // Show the next image after the fade-out
-        }, 500); // Half a second for fade-out
+            showNextImage();
+        }, 500);
     }
 
-    // Show the first image immediately
+    function loadGallery() {
+        artFiles.forEach((file, index) => {
+            const img = new Image();
+            img.src = file;
+            img.alt = `Artwork ${index + 1}`;
+
+            img.onload = function() {
+                const galleryImg = new Image();
+                galleryImg.src = file;
+                galleryImg.alt = `Artwork ${index + 1}`;
+                galleryImg.addEventListener('click', function() {
+                    isClicked = true;
+                    clearInterval(intervalId);
+                    scrollToTop();
+                    showImageForDuration(file, 30000);
+                });
+                galleryView.appendChild(galleryImg);
+            };
+        });
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function showImageForDuration(src, duration) {
+        const img = new Image();
+        img.src = src;
+        img.classList.add('fade');
+        img.onload = function() {
+            artDisplay.innerHTML = '';
+            artDisplay.appendChild(img);
+            setTimeout(() => {
+                img.style.opacity = '1';
+            }, 100);
+        };
+
+        setTimeout(() => {
+            isClicked = false;
+            intervalId = setInterval(nextImage, 2000);
+        }, duration);
+    }
+
+    loadGallery();
     showNextImage();
+    intervalId = setInterval(nextImage, 2000);
 
-    // Change the image every 2 seconds with a smooth fade
-    setInterval(nextImage, 2000);
-
-    // Show the header when scrolling down
     window.addEventListener('scroll', function() {
         if (window.scrollY > window.innerHeight) {
             header.style.display = 'flex';
+            galleryView.style.display = 'flex';
         } else {
             header.style.display = 'none';
+            galleryView.style.display = 'none';
         }
     });
 });
