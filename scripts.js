@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const artDisplay = document.getElementById("art-display");
-    const galleryView = document.createElement('div');
-    galleryView.id = "gallery-view";
-    document.body.appendChild(galleryView);
+    const galleryView = document.getElementById("gallery-view");
     
     // Generate an array of 100 art file names
     const artFiles = Array.from({length: 100}, (_, i) => `art${i + 1}.jpg`);
