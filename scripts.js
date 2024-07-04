@@ -106,4 +106,14 @@ document.addEventListener("DOMContentLoaded", function() {
             galleryView.style.display = 'none';
         }
     });
+
+    window.addEventListener('resize', function() {
+        if (window.innerHeight < window.innerWidth) {
+            // Landscape
+            artDisplay.style.flexDirection = 'row';
+        } else {
+            // Portrait
+            artDisplay.style.flexDirection = 'column';
+        }
+    });
 });
