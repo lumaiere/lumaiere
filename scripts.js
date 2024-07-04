@@ -115,25 +115,21 @@ document.addEventListener("DOMContentLoaded", function() {
     loadGallery();
 
     window.addEventListener('scroll', function() {
-        console.log('Scroll event fired!');
         const scrollTop = window.scrollY;
-        console.log('Scroll top:', scrollTop);
-        // Add more logging as needed
         const galleryOffset = galleryView.offsetTop;
         const galleryHeight = galleryView.offsetHeight;
-        
-        if (scrollTop > galleryOffset - window.innerHeight) {
-            // Scrolled past the gallery, show main view
-            artDisplay.style.opacity = '1';
-        } else {
-            // Scrolled to show gallery
+    
+        if (scrollTop > 0) {
+            // User scrolled down, display the gallery and hide the main art display
+            galleryView.style.opacity = '1';
             artDisplay.style.opacity = '0';
+        } else {
+            // User at the top of the page, display the main art display and hide the gallery
+            galleryView.style.opacity = '0';
+            artDisplay.style.opacity = '1';
         }
-
-        // Fade gallery in/out based on scroll position
-        const scrollPosition = Math.min(1, scrollTop / (galleryOffset + galleryHeight));
-        galleryView.style.opacity = scrollPosition.toFixed(2);
     });
+    
 
     window.addEventListener('resize', function() {
         if (window.innerHeight < window.innerWidth) {
