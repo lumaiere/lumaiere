@@ -115,7 +115,10 @@ document.addEventListener("DOMContentLoaded", function() {
     loadGallery();
 
     window.addEventListener('scroll', function() {
+        console.log('Scroll event fired!');
         const scrollTop = window.scrollY;
+        console.log('Scroll top:', scrollTop);
+        // Add more logging as needed
         const galleryOffset = galleryView.offsetTop;
         const galleryHeight = galleryView.offsetHeight;
         
