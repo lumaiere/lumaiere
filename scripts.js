@@ -115,13 +115,21 @@ document.addEventListener("DOMContentLoaded", function() {
     loadGallery();
 
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 0) {
-            artDisplay.style.opacity = '0';
-            galleryView.style.opacity = '1';
-        } else {
+        const scrollTop = window.scrollY;
+        const galleryOffset = galleryView.offsetTop;
+        const galleryHeight = galleryView.offsetHeight;
+        
+        if (scrollTop > galleryOffset - window.innerHeight) {
+            // Scrolled past the gallery, show main view
             artDisplay.style.opacity = '1';
-            galleryView.style.opacity = '0';
+        } else {
+            // Scrolled to show gallery
+            artDisplay.style.opacity = '0';
         }
+
+        // Fade gallery in/out based on scroll position
+        const scrollPosition = Math.min(1, scrollTop / (galleryOffset + galleryHeight));
+        galleryView.style.opacity = scrollPosition.toFixed(2);
     });
 
     window.addEventListener('resize', function() {
