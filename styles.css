@@ -15,6 +15,7 @@ body {
     align-items: center;
     background-color: white;
     z-index: 2; /* Main view on top of gallery */
+    opacity: 1; /* Initially visible */
     transition: opacity 0.5s ease; /* Fade effect on scroll */
 }
 
@@ -34,7 +35,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh; /* Fill entire viewport */
     background-color: white;
     z-index: 1; /* Gallery behind main view */
     opacity: 0; /* Initially hidden */
