@@ -2,36 +2,29 @@ document.addEventListener("DOMContentLoaded", function() {
     const artDisplay = document.getElementById("art-display");
     const galleryView = document.getElementById("gallery-view");
 
+    const artFiles = [
+        "art1.jpg",
+        "art2.jpg",
+        "art3.jpg",
+        "art4.jpg",
+        "art5.jpg",
+        "art6.jpg",
+        "art7.jpg",
+        "art8.jpg",
+        "art9.jpg"
+    ];
+
     let currentIndex = 0;
     let intervalId;
     let isClicked = false;
-    let validArtFiles = [];
 
     function preloadImages() {
-        fetchArtFiles()
-            .then(files => {
-                validArtFiles = files.filter(file => file.match(/^art\d+\.jpg$/i));
-                return Promise.all(validArtFiles.map(file => loadImage(file)));
-            })
+        Promise.all(artFiles.map(file => loadImage(file)))
             .then(() => {
                 showNextImage();
                 intervalId = setInterval(nextImage, 4000);
             })
             .catch(error => console.error('Error loading images:', error));
-    }
-
-    function fetchArtFiles() {
-        return new Promise((resolve, reject) => {
-            fetch('./')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const links = Array.from(doc.querySelectorAll('a')).map(a => a.getAttribute('href'));
-                    resolve(links);
-                })
-                .catch(error => reject(error));
-        });
     }
 
     function loadImage(src) {
@@ -47,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (isClicked) return;
 
         const img = new Image();
-        img.src = validArtFiles[currentIndex];
+        img.src = artFiles[currentIndex];
         img.classList.add('fade'); // Add class for fade effect
 
         img.onload = function() {
@@ -58,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }, 100);
         };
 
-        currentIndex = (currentIndex + 1) % validArtFiles.length;
+        currentIndex = (currentIndex + 1) % artFiles.length;
     }
 
     function nextImage() {
@@ -73,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function loadGallery() {
-        validArtFiles.forEach((file, index) => {
+        artFiles.forEach((file, index) => {
             const img = new Image();
             img.src = file;
             img.alt = `Artwork ${index + 1}`;
