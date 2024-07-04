@@ -2,34 +2,29 @@ document.addEventListener("DOMContentLoaded", function() {
     const artDisplay = document.getElementById("art-display");
     const header = document.querySelector("header");
 
-    // Array to hold the file names
-    const artFiles = [
-        'art1.jpg',
-        'art2.jpg',
-        'art3.jpg',
-        'art4.jpg',
-        'art5.jpg',
-        'art6.jpg',
-        'art7.jpg',
-        'art8.jpg',
-        'art9.jpg'
-    ];
+    // Generate an array of 100 art file names
+    const artFiles = Array.from({length: 100}, (_, i) => `art${i + 1}.jpg`);
 
     let currentIndex = 0;
 
     function showNextImage() {
-        // Remove the current image
-        artDisplay.innerHTML = '';
-
-        // Create a new image element
-        const img = document.createElement("img");
+        // Check if the current image exists
+        const img = new Image();
         img.src = artFiles[currentIndex];
-        img.alt = `Artwork ${currentIndex + 1}`;
 
-        // Append the image to the display
-        artDisplay.appendChild(img);
+        img.onload = function() {
+            // If the image loads successfully, display it
+            artDisplay.innerHTML = '';
+            artDisplay.appendChild(img);
+        };
 
-        // Update the index for the next image
+        img.onerror = function() {
+            // If the image fails to load, move to the next one immediately
+            currentIndex = (currentIndex + 1) % artFiles.length;
+            showNextImage();
+        };
+
+        // Update the index for the next image after 2 seconds
         currentIndex = (currentIndex + 1) % artFiles.length;
     }
 
