@@ -2,28 +2,31 @@ document.addEventListener("DOMContentLoaded", function() {
     const artDisplay = document.getElementById("art-display");
     const galleryView = document.getElementById("gallery-view");
 
-    const artFiles = [
-        "art1.jpg",
-        "art2.jpg",
-        "art3.jpg",
-        "art4.jpg",
-        "art5.jpg",
-        "art6.jpg",
-        "art7.jpg",
-        "art8.jpg",
-        "art9.jpg",
-        "art10.jpg",
-    ];
-
+    const totalImages = 100; // Maximum number of images
+    const artFiles = [];
     let currentIndex = 0;
     let intervalId;
     let isClicked = false;
 
     function preloadImages() {
-        Promise.all(artFiles.map(file => loadImage(file)))
+        const loadPromises = [];
+
+        for (let i = 1; i <= totalImages; i++) {
+            const file = `art${i}.jpg`;
+            loadPromises.push(
+                loadImage(file).then(img => artFiles.push(file)).catch(err => console.error(err))
+            );
+        }
+
+        Promise.all(loadPromises)
             .then(() => {
-                showNextImage();
-                intervalId = setInterval(nextImage, 4000);
+                if (artFiles.length > 0) {
+                    showNextImage();
+                    intervalId = setInterval(nextImage, 4000);
+                    loadGallery();
+                } else {
+                    console.error('No images to display');
+                }
             })
             .catch(error => console.error('Error loading images:', error));
     }
@@ -60,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (currentImg) {
             currentImg.style.opacity = '0';
         }
-        
+
         setTimeout(() => {
             showNextImage();
         }, 2000);
@@ -113,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     preloadImages();
-    loadGallery();
 
     window.addEventListener('scroll', function() {
         const scrollTop = window.scrollY;
