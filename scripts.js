@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const artDisplay = document.getElementById("art-display");
     const galleryView = document.getElementById("gallery-view");
 
-    // Assuming the maximum number of art files is 100
     const maxArtFiles = 100;
     const artFiles = [];
     let currentIndex = 0;
@@ -51,33 +50,46 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    function showNextImage() {
-        if (isClicked) return;
-
+    function showImage(index) {
         const img = new Image();
-        img.src = artFiles[currentIndex];
-        img.classList.add('fade');
+        img.src = artFiles[index];
+        img.classList.add('fade'); // Add class for fade effect
 
         img.onload = function() {
             artDisplay.innerHTML = '';
             artDisplay.appendChild(img);
             setTimeout(() => {
-                img.style.opacity = '1';
+                img.style.opacity = '1'; // Fade in the image
             }, 100);
         };
-
-        currentIndex = (currentIndex + 1) % artFiles.length;
     }
 
-    function nextImage() {
+    function showNextImage() {
+        if (isClicked) return;
+
         const currentImg = artDisplay.querySelector('img');
         if (currentImg) {
             currentImg.style.opacity = '0';
         }
         
         setTimeout(() => {
-            showNextImage();
-        }, 1000);
+            currentIndex = (currentIndex + 1) % artFiles.length;
+            showImage(currentIndex);
+        }, 1000); // Reduced time to 1 second for fading effect
+    }
+
+    function showPrevImage() {
+        if (isClicked) return;
+
+        const currentImg = artDisplay.querySelector('img');
+        if (currentImg) {
+            currentImg.style.opacity = '0';
+        }
+
+        setTimeout(() => {
+            currentIndex = (currentIndex - 1 + artFiles.length) % artFiles.length;
+            showImage(currentIndex);
+        }, 1000); // Reduced time to 1 second for fading effect
     }
 
     function loadGallery() {
@@ -89,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 isClicked = true;
                 clearInterval(intervalId);
                 scrollToTop();
-                showImageForDuration(file, 30000);
+                showImageForDuration(index, 30000);
             });
             galleryView.appendChild(galleryImg);
         });
@@ -102,9 +114,9 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    function showImageForDuration(src, duration) {
+    function showImageForDuration(index, duration) {
         const img = new Image();
-        img.src = src;
+        img.src = artFiles[index];
         img.classList.add('fade');
         img.onload = function() {
             artDisplay.innerHTML = '';
@@ -122,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.addEventListener('scroll', function() {
         const scrollTop = window.scrollY;
-        
+
         if (scrollTop > 0) {
             galleryView.style.opacity = '1';
             artDisplay.style.opacity = '0';
@@ -143,7 +155,11 @@ document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener('keydown', function(event) {
         if (event.key === 'ArrowRight') {
             clearInterval(intervalId);
-            nextImage();
+            showNextImage();
+            intervalId = setInterval(nextImage, 4000);
+        } else if (event.key === 'ArrowLeft') {
+            clearInterval(intervalId);
+            showPrevImage();
             intervalId = setInterval(nextImage, 4000);
         }
     });
