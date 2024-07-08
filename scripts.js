@@ -2,31 +2,42 @@ document.addEventListener("DOMContentLoaded", function() {
     const artDisplay = document.getElementById("art-display");
     const galleryView = document.getElementById("gallery-view");
 
-    const totalImages = 100; // Maximum number of images
+    // Assuming the maximum number of art files is 100
+    const maxArtFiles = 100;
     const artFiles = [];
     let currentIndex = 0;
     let intervalId;
     let isClicked = false;
 
-    function preloadImages() {
-        const loadPromises = [];
+    function imageExists(src) {
+        return new Promise(resolve => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+        });
+    }
 
-        for (let i = 1; i <= totalImages; i++) {
-            const file = `art${i}.jpg`;
-            loadPromises.push(
-                loadImage(file).then(img => artFiles.push(file)).catch(err => console.error(err))
-            );
+    async function loadArtFiles() {
+        for (let i = 1; i <= maxArtFiles; i++) {
+            const fileName = `art${i}.jpg`;
+            if (await imageExists(fileName)) {
+                artFiles.push(fileName);
+            }
         }
+        if (artFiles.length > 0) {
+            preloadImages();
+            loadGallery();
+        } else {
+            console.error('No art files found.');
+        }
+    }
 
-        Promise.all(loadPromises)
+    function preloadImages() {
+        Promise.all(artFiles.map(file => loadImage(file)))
             .then(() => {
-                if (artFiles.length > 0) {
-                    showNextImage();
-                    intervalId = setInterval(nextImage, 4000);
-                    loadGallery();
-                } else {
-                    console.error('No images to display');
-                }
+                showNextImage();
+                intervalId = setInterval(nextImage, 4000);
             })
             .catch(error => console.error('Error loading images:', error));
     }
@@ -45,13 +56,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const img = new Image();
         img.src = artFiles[currentIndex];
-        img.classList.add('fade'); // Add class for fade effect
+        img.classList.add('fade');
 
         img.onload = function() {
             artDisplay.innerHTML = '';
             artDisplay.appendChild(img);
             setTimeout(() => {
-                img.style.opacity = '1'; // Fade in the image
+                img.style.opacity = '1';
             }, 100);
         };
 
@@ -63,30 +74,24 @@ document.addEventListener("DOMContentLoaded", function() {
         if (currentImg) {
             currentImg.style.opacity = '0';
         }
-
+        
         setTimeout(() => {
             showNextImage();
-        }, 2000);
+        }, 1000);
     }
 
     function loadGallery() {
         artFiles.forEach((file, index) => {
-            const img = new Image();
-            img.src = file;
-            img.alt = `Artwork ${index + 1}`;
-
-            img.onload = function() {
-                const galleryImg = new Image();
-                galleryImg.src = file;
-                galleryImg.alt = `Artwork ${index + 1}`;
-                galleryImg.addEventListener('click', function() {
-                    isClicked = true;
-                    clearInterval(intervalId);
-                    scrollToTop();
-                    showImageForDuration(file, 30000);
-                });
-                galleryView.appendChild(galleryImg);
-            };
+            const galleryImg = new Image();
+            galleryImg.src = file;
+            galleryImg.alt = `Artwork ${index + 1}`;
+            galleryImg.addEventListener('click', function() {
+                isClicked = true;
+                clearInterval(intervalId);
+                scrollToTop();
+                showImageForDuration(file, 30000);
+            });
+            galleryView.appendChild(galleryImg);
         });
     }
 
@@ -115,17 +120,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }, duration);
     }
 
-    preloadImages();
-
     window.addEventListener('scroll', function() {
         const scrollTop = window.scrollY;
-
+        
         if (scrollTop > 0) {
-            // Scrolled down, show gallery view and hide art display
             galleryView.style.opacity = '1';
             artDisplay.style.opacity = '0';
         } else {
-            // At the top, show art display and hide gallery view
             galleryView.style.opacity = '0';
             artDisplay.style.opacity = '1';
         }
@@ -133,11 +134,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.addEventListener('resize', function() {
         if (window.innerHeight < window.innerWidth) {
-            // Landscape orientation
             artDisplay.style.flexDirection = 'row';
         } else {
-            // Portrait orientation
             artDisplay.style.flexDirection = 'column';
         }
     });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowRight') {
+            clearInterval(intervalId);
+            nextImage();
+            intervalId = setInterval(nextImage, 4000);
+        }
+    });
+
+    loadArtFiles();
 });
