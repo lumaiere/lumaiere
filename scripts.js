@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
         Promise.all(artFiles.map(file => loadImage(file)))
             .then(() => {
                 showNextImage();
-                intervalId = setInterval(nextImage, 4000);
+                startAutoRotation();
             })
             .catch(error => console.error('Error loading images:', error));
     }
@@ -128,8 +128,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         setTimeout(() => {
             isClicked = false;
-            intervalId = setInterval(nextImage, 4000);
+            startAutoRotation();
         }, duration);
+    }
+
+    function startAutoRotation() {
+        intervalId = setInterval(showNextImage, 4000);
     }
 
     window.addEventListener('scroll', function() {
@@ -153,15 +157,13 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     document.addEventListener('keydown', function(event) {
+        clearInterval(intervalId);
         if (event.key === 'ArrowRight') {
-            clearInterval(intervalId);
             showNextImage();
-            intervalId = setInterval(nextImage, 4000);
         } else if (event.key === 'ArrowLeft') {
-            clearInterval(intervalId);
             showPrevImage();
-            intervalId = setInterval(nextImage, 4000);
         }
+        startAutoRotation();
     });
 
     loadArtFiles();
