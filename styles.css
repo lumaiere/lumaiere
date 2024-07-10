@@ -48,12 +48,15 @@ main {
     margin-top: 20px;
     width: 100%;
     background-color: white; /* Ensure background matches */
+    position: relative;
 }
 
 #gallery-view img {
     margin: 5px;
     cursor: pointer;
     transition: transform 0.3s;
+    width: auto;
+    height: auto;
     max-width: 100px;
     max-height: 100px;
 }

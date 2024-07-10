@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
         img.onload = function() {
             artDisplay.innerHTML = '';
             artDisplay.appendChild(img);
+            adjustImageSize(img);
             setTimeout(() => {
                 img.style.opacity = '1'; // Fade in the image
             }, 100);
@@ -71,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (currentImg) {
             currentImg.style.opacity = '0';
         }
-        
+
         setTimeout(() => {
             currentIndex = (currentIndex + 1) % artFiles.length;
             showImage(currentIndex);
@@ -121,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function() {
         img.onload = function() {
             artDisplay.innerHTML = '';
             artDisplay.appendChild(img);
+            adjustImageSize(img);
             setTimeout(() => {
                 img.style.opacity = '1';
             }, 100);
@@ -153,8 +155,10 @@ document.addEventListener("DOMContentLoaded", function() {
         adjustImageSize();
     });
 
-    function adjustImageSize() {
-        const img = artDisplay.querySelector('img');
+    function adjustImageSize(img = null) {
+        if (!img) {
+            img = artDisplay.querySelector('img');
+        }
         if (img) {
             const windowAspectRatio = window.innerWidth / window.innerHeight;
             const imageAspectRatio = img.naturalWidth / img.naturalHeight;
@@ -169,7 +173,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    adjustImageSize();
     loadArtFiles();
 
     // Event listeners for arrow keys
