@@ -100,8 +100,8 @@ document.addEventListener("DOMContentLoaded", function() {
             galleryImg.addEventListener('click', function() {
                 isClicked = true;
                 clearInterval(intervalId);
-                scrollToTop();
                 showImageForDuration(index, 30000);
+                scrollToTop();
             });
             galleryView.appendChild(galleryImg);
         });
