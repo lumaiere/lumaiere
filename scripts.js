@@ -170,4 +170,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     adjustImageSize();
     loadArtFiles();
+
+    // Event listeners for arrow keys
+    document.addEventListener('keydown', function(event) {
+        clearInterval(intervalId);
+        if (event.key === 'ArrowRight') {
+            showNextImage();
+        } else if (event.key === 'ArrowLeft') {
+            showPrevImage();
+        }
+        startAutoRotation();
+    });
 });
