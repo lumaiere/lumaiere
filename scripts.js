@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
             galleryImg.alt = `Artwork ${index + 1}`;
             galleryImg.addEventListener('click', function() {
                 isClicked = true;
-                clearInterval(intervalId);
+                clearInterval(intervalId); // Clear any existing interval
                 showImageForDuration(index, 30000);
                 scrollToTop();
             });
@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function startAutoRotation() {
+        clearInterval(intervalId); // Clear any existing interval
         intervalId = setInterval(showNextImage, 4000);
     }
 
