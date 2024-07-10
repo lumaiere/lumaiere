@@ -7,7 +7,7 @@ body {
 #art-display {
     position: relative; /* Relative positioning for z-index management */
     width: 100%;
-    min-height: 100vh; /* Use viewport height */
+    height: 100vh; /* Use viewport height */
     display: flex;
     justify-content: center;
     align-items: center;

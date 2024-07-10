@@ -149,22 +149,25 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     window.addEventListener('resize', function() {
-        if (window.innerHeight < window.innerWidth) {
-            artDisplay.style.flexDirection = 'row';
-        } else {
-            artDisplay.style.flexDirection = 'column';
-        }
+        adjustImageSize();
     });
 
-    document.addEventListener('keydown', function(event) {
-        clearInterval(intervalId);
-        if (event.key === 'ArrowRight') {
-            showNextImage();
-        } else if (event.key === 'ArrowLeft') {
-            showPrevImage();
-        }
-        startAutoRotation();
-    });
+    function adjustImageSize() {
+        const img = artDisplay.querySelector('img');
+        if (img) {
+            const windowAspectRatio = window.innerWidth / window.innerHeight;
+            const imageAspectRatio = img.naturalWidth / img.naturalHeight;
 
+            if (windowAspectRatio > imageAspectRatio) {
+                img.style.width = '90%';
+                img.style.height = 'auto';
+            } else {
+                img.style.width = 'auto';
+                img.style.height = '90%';
+            }
+        }
+    }
+
+    adjustImageSize();
     loadArtFiles();
 });
