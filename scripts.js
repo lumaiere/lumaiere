@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => {
             currentIndex = (currentIndex + 1) % artFiles.length;
             showImage(currentIndex);
-        }, 1000); // Reduced time to 1 second for fading effect
+        }, 500); // Reduced time to 1 second for fading effect
     }
 
     function showPrevImage() {
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => {
             currentIndex = (currentIndex - 1 + artFiles.length) % artFiles.length;
             showImage(currentIndex);
-        }, 1000); // Reduced time to 1 second for fading effect
+        }, 500); // Reduced time to 1 second for fading effect
     }
 
     function loadGallery() {
@@ -174,12 +174,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Event listeners for arrow keys
     document.addEventListener('keydown', function(event) {
-        clearInterval(intervalId);
         if (event.key === 'ArrowRight') {
+            clearInterval(intervalId); // Clear any existing interval
             showNextImage();
+            startAutoRotation();
         } else if (event.key === 'ArrowLeft') {
+            clearInterval(intervalId); // Clear any existing interval
             showPrevImage();
+            startAutoRotation();
         }
-        startAutoRotation();
     });
 });
