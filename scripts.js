@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", function() {
         img.onload = function() {
             artDisplay.innerHTML = '';
             artDisplay.appendChild(img);
-            adjustImageSize(img);
             setTimeout(() => {
                 img.style.opacity = '1'; // Fade in the image
             }, 100);
@@ -122,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function() {
         img.onload = function() {
             artDisplay.innerHTML = '';
             artDisplay.appendChild(img);
-            adjustImageSize(img);
             setTimeout(() => {
                 img.style.opacity = '1';
             }, 100);
@@ -160,16 +158,20 @@ document.addEventListener("DOMContentLoaded", function() {
             img = artDisplay.querySelector('img');
         }
         if (img) {
-            const windowAspectRatio = window.innerWidth / window.innerHeight;
-            const imageAspectRatio = img.naturalWidth / img.naturalHeight;
+            const parentWidth = artDisplay.clientWidth;
+            const parentHeight = artDisplay.clientHeight;
+            const maxWidth = parentWidth * 0.8;
+            const maxHeight = parentHeight * 0.8;
 
-            if (windowAspectRatio > imageAspectRatio) {
-                img.style.width = '90%';
-                img.style.height = 'auto';
-            } else {
-                img.style.width = 'auto';
-                img.style.height = '90%';
-            }
+            const imgWidth = img.naturalWidth;
+            const imgHeight = img.naturalHeight;
+
+            const widthRatio = maxWidth / imgWidth;
+            const heightRatio = maxHeight / imgHeight;
+            const scale = Math.min(widthRatio, heightRatio, 1);
+
+            img.style.width = imgWidth * scale + 'px';
+            img.style.height = imgHeight * scale + 'px';
         }
     }
 
