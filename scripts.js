@@ -25,29 +25,27 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
         if (artFiles.length > 0) {
-            preloadImages();
+            loadInitialImage();
+            loadRemainingImages();
             loadGallery();
         } else {
             console.error('No art files found.');
         }
     }
 
-    function preloadImages() {
-        Promise.all(artFiles.map(file => loadImage(file)))
-            .then(() => {
-                showNextImage();
-                startAutoRotation();
-            })
-            .catch(error => console.error('Error loading images:', error));
+    function loadInitialImage() {
+        if (artFiles.length > 0) {
+            showImage(0);
+            currentIndex = 0;
+            startAutoRotation();
+        }
     }
 
-    function loadImage(src) {
-        return new Promise((resolve, reject) => {
+    function loadRemainingImages() {
+        for (let i = 1; i < artFiles.length; i++) {
             const img = new Image();
-            img.src = src;
-            img.onload = () => resolve(img);
-            img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
-        });
+            img.src = artFiles[i];
+        }
     }
 
     function showImage(index) {
@@ -58,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
         img.onload = function() {
             artDisplay.innerHTML = '';
             artDisplay.appendChild(img);
+            adjustImageSize(img);
             setTimeout(() => {
                 img.style.opacity = '1'; // Fade in the image
             }, 100);
@@ -121,6 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
         img.onload = function() {
             artDisplay.innerHTML = '';
             artDisplay.appendChild(img);
+            adjustImageSize(img);
             setTimeout(() => {
                 img.style.opacity = '1';
             }, 100);
