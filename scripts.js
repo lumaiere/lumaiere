@@ -160,8 +160,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (img) {
             const parentWidth = artDisplay.clientWidth;
             const parentHeight = artDisplay.clientHeight;
-            const maxWidth = parentWidth * 0.8;
-            const maxHeight = parentHeight * 0.8;
+            const maxWidth = parentWidth * 0.9; // 95% of parent width to leave 5% whitespace on each side
+            const maxHeight = parentHeight * 0.9; // 95% of parent height to leave 5% whitespace on each side
 
             const imgWidth = img.naturalWidth;
             const imgHeight = img.naturalHeight;
