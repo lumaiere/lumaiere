@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let intervalId;
     let isClicked = false;
 
-    function imageExists(src) {
+    async function imageExists(src) {
         return new Promise(resolve => {
             const img = new Image();
             img.src = src;
@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         if (artFiles.length > 0) {
             loadInitialImage();
-            loadRemainingImages();
             loadGallery();
         } else {
             console.error('No art files found.');
@@ -41,11 +40,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    function loadRemainingImages() {
-        for (let i = 1; i < artFiles.length; i++) {
-            const img = new Image();
-            img.src = artFiles[i];
-        }
+    function lazyLoadImage(index) {
+        const img = new Image();
+        img.src = artFiles[index];
     }
 
     function showImage(index) {
@@ -74,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => {
             currentIndex = (currentIndex + 1) % artFiles.length;
             showImage(currentIndex);
+            lazyLoadImage(currentIndex + 1);
         }, 500); // Reduced time to 1 second for fading effect
     }
 
@@ -88,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => {
             currentIndex = (currentIndex - 1 + artFiles.length) % artFiles.length;
             showImage(currentIndex);
+            lazyLoadImage(currentIndex - 1);
         }, 500); // Reduced time to 1 second for fading effect
     }
 
@@ -160,8 +159,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (img) {
             const parentWidth = artDisplay.clientWidth;
             const parentHeight = artDisplay.clientHeight;
-            const maxWidth = parentWidth * 0.9; // 95% of parent width to leave 5% whitespace on each side
-            const maxHeight = parentHeight * 0.9; // 95% of parent height to leave 5% whitespace on each side
+            const maxWidth = parentWidth * 0.95; // 95% of parent width to leave 5% whitespace on each side
+            const maxHeight = parentHeight * 0.95; // 95% of parent height to leave 5% whitespace on each side
 
             const imgWidth = img.naturalWidth;
             const imgHeight = img.naturalHeight;
