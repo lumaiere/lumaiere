@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         if (artFiles.length > 0) {
             loadInitialImage();
-            loadGallery();
+            setTimeout(loadGallery, 100); // Slight delay to not block the initial load
         } else {
             console.error('No art files found.');
         }
@@ -159,8 +159,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (img) {
             const parentWidth = artDisplay.clientWidth;
             const parentHeight = artDisplay.clientHeight;
-            const maxWidth = parentWidth * 0.95; // 95% of parent width to leave 2.5% whitespace on each side
-            const maxHeight = parentHeight * 0.95; // 95% of parent height to leave 2.5% whitespace on each side
+            const maxWidth = parentWidth * 0.95; // 95% of parent width to leave 5% whitespace on each side
+            const maxHeight = parentHeight * 0.95; // 95% of parent height to leave 5% whitespace on each side
 
             const imgWidth = img.naturalWidth;
             const imgHeight = img.naturalHeight;
