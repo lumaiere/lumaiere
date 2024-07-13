@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         if (artFiles.length > 0) {
             loadInitialImage();
-            setTimeout(loadGallery, 100); // Slight delay to not block the initial load
+            setTimeout(loadGallery, 20000); // Exaggerated delay of 20 seconds for lazy loading
         } else {
             console.error('No art files found.');
         }
