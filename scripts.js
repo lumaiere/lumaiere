@@ -17,34 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    async function loadArtFiles() {
-        for (let i = 1; i <= maxArtFiles; i++) {
-            const fileName = `art${i}.jpg`;
-            if (await imageExists(fileName)) {
-                artFiles.push(fileName);
-            }
-        }
-        if (artFiles.length > 0) {
-            loadInitialImage();
-            setTimeout(loadGallery, 20000); // Exaggerated delay of 20 seconds for lazy loading
-        } else {
-            console.error('No art files found.');
-        }
-    }
-
-    function loadInitialImage() {
-        if (artFiles.length > 0) {
-            showImage(0);
-            currentIndex = 0;
-            startAutoRotation();
-        }
-    }
-
-    function lazyLoadImage(index) {
-        const img = new Image();
-        img.src = artFiles[index];
-    }
-
     function showImage(index) {
         const img = new Image();
         img.src = artFiles[index];
@@ -58,6 +30,41 @@ document.addEventListener("DOMContentLoaded", function() {
                 img.style.opacity = '1'; // Fade in the image
             }, 100);
         };
+    }
+
+    function loadInitialImage() {
+        const initialImg = new Image();
+        initialImg.src = 'art1.jpg'; // Assuming the first image is 'art1.jpg'
+        initialImg.classList.add('fade'); // Add class for fade effect
+
+        initialImg.onload = function() {
+            artDisplay.innerHTML = '';
+            artDisplay.appendChild(initialImg);
+            adjustImageSize(initialImg);
+            setTimeout(() => {
+                initialImg.style.opacity = '1'; // Fade in the image
+            }, 100);
+        };
+    }
+
+    async function loadArtFiles() {
+        for (let i = 1; i <= maxArtFiles; i++) {
+            const fileName = `art${i}.jpg`;
+            if (await imageExists(fileName)) {
+                artFiles.push(fileName);
+            }
+        }
+        if (artFiles.length > 0) {
+            startAutoRotation();
+            loadGallery();
+        } else {
+            console.error('No art files found.');
+        }
+    }
+
+    function lazyLoadImage(index) {
+        const img = new Image();
+        img.src = artFiles[index];
     }
 
     function showNextImage() {
@@ -171,10 +178,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
             img.style.width = imgWidth * scale + 'px';
             img.style.height = imgHeight * scale + 'px';
+            img.style.display = 'block';
+            img.style.margin = 'auto';
         }
     }
 
-    loadArtFiles();
+    loadInitialImage();
+    requestAnimationFrame(loadArtFiles);
 
     // Event listeners for arrow keys
     document.addEventListener('keydown', function(event) {
