@@ -178,8 +178,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
             img.style.width = imgWidth * scale + 'px';
             img.style.height = imgHeight * scale + 'px';
-            img.style.display = 'block';
-            img.style.margin = 'auto';
+            img.style.position = 'absolute';
+            img.style.top = '50%';
+            img.style.left = '50%';
+            img.style.transform = 'translate(-50%, -50%)'; // Center both horizontally and vertically
         }
     }
 
