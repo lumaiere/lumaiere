@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentIndex = 0;
     let intervalId;
     let isClicked = false;
+    let startX = 0;
 
     async function imageExists(src) {
         return new Promise(resolve => {
@@ -199,5 +200,36 @@ document.addEventListener("DOMContentLoaded", function() {
             showPrevImage();
             startAutoRotation();
         }
+    });
+
+    // Touch event listeners for swipe gestures
+    artDisplay.addEventListener('touchstart', function(event) {
+        startX = event.touches[0].clientX;
+    });
+
+    artDisplay.addEventListener('touchmove', function(event) {
+        if (!startX) return;
+
+        const endX = event.touches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) { // Swipe threshold
+            if (diffX > 0) {
+                // Swiped left
+                clearInterval(intervalId);
+                showNextImage();
+                startAutoRotation();
+            } else {
+                // Swiped right
+                clearInterval(intervalId);
+                showPrevImage();
+                startAutoRotation();
+            }
+            startX = 0; // Reset startX
+        }
+    });
+
+    artDisplay.addEventListener('touchend', function() {
+        startX = 0; // Reset startX
     });
 });
