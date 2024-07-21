@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const artDisplay = document.getElementById("art-display");
     const galleryView = document.getElementById("gallery-view");
+    const galleryLinks = document.getElementById("gallery-links");
 
     const maxArtFiles = 100;
     const artFiles = [];
@@ -8,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function() {
     let intervalId;
     let isClicked = false;
     let startX = 0;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const galleryType = urlParams.get('gallery') || 'main'; // Default to 'main' gallery
 
     async function imageExists(src) {
         return new Promise(resolve => {
@@ -35,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function loadInitialImage() {
         const initialImg = new Image();
-        initialImg.src = 'art1.jpg'; // Assuming the first image is 'art1.jpg'
+        initialImg.src = galleryType === 'lake' ? 'serene_lake/art1.jpg' : 'art1.jpg'; // Load the first image based on gallery type
         initialImg.classList.add('fade'); // Add class for fade effect
 
         initialImg.onload = function() {
@@ -50,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function loadArtFiles() {
         for (let i = 1; i <= maxArtFiles; i++) {
-            const fileName = `art${i}.jpg`;
+            const fileName = galleryType === 'lake' ? `serene_lake/art${i}.jpg` : `art${i}.jpg`; // Load files based on gallery type
             if (await imageExists(fileName)) {
                 artFiles.push(fileName);
             }
