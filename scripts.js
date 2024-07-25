@@ -38,8 +38,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function loadInitialImage() {
+        let initialImgSrc;
+        switch (galleryType) {
+            case 'lake':
+                initialImgSrc = 'serene_lake/art1.jpg';
+                break;
+            case 'laugh':
+                initialImgSrc = 'share-a-laugh-with-friends/art1.jpg';
+                break;
+            default:
+                initialImgSrc = 'art1.jpg';
+                break;
+        }
         const initialImg = new Image();
-        initialImg.src = galleryType === 'lake' ? 'serene_lake/art1.jpg' : 'art1.jpg'; // Load the first image based on gallery type
+        initialImg.src = initialImgSrc; // Load the first image based on gallery type
         initialImg.classList.add('fade'); // Add class for fade effect
 
         initialImg.onload = function() {
@@ -54,7 +66,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function loadArtFiles() {
         for (let i = 1; i <= maxArtFiles; i++) {
-            const fileName = galleryType === 'lake' ? `serene_lake/art${i}.jpg` : `art${i}.jpg`; // Load files based on gallery type
+            let fileName;
+            switch (galleryType) {
+                case 'lake':
+                    fileName = `serene_lake/art${i}.jpg`;
+                    break;
+                case 'laugh':
+                    fileName = `share-a-laugh-with-friends/art${i}.jpg`;
+                    break;
+                default:
+                    fileName = `art${i}.jpg`;
+                    break;
+            }
             if (await imageExists(fileName)) {
                 artFiles.push(fileName);
             }
