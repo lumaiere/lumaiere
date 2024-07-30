@@ -46,6 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
             case 'laugh':
                 initialImgSrc = 'share-a-laugh-with-friends/art1.jpg';
                 break;
+            case 'avenues':
+                initialImgSrc = 'avenues/art1.jpg';
+                break;
             default:
                 initialImgSrc = 'art1.jpg';
                 break;
@@ -73,6 +76,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     break;
                 case 'laugh':
                     fileName = `share-a-laugh-with-friends/art${i}.jpg`;
+                    break;
+                case 'avenues':
+                    fileName = `avenues/art${i}.jpg`;
                     break;
                 default:
                     fileName = `art${i}.jpg`;
