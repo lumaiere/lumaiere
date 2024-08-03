@@ -49,6 +49,9 @@ document.addEventListener("DOMContentLoaded", function() {
             case 'avenues':
                 initialImgSrc = 'avenues/art1.jpg';
                 break;
+            case 'impressionist':
+                initialImgSrc = 'impressionist/art1.jpg';
+                break;
             default:
                 initialImgSrc = 'art1.jpg';
                 break;
@@ -79,6 +82,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     break;
                 case 'avenues':
                     fileName = `avenues/art${i}.jpg`;
+                    break;
+                case 'impressionist':
+                    fileName = `impressionist/art${i}.jpg`;
                     break;
                 default:
                     fileName = `art${i}.jpg`;
@@ -113,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
             currentIndex = (currentIndex + 1) % artFiles.length;
             showImage(currentIndex);
             lazyLoadImage(currentIndex + 1);
-        }, 500); // Reduced time to 1 second for fading effect
+        }, 500);
     }
 
     function showPrevImage() {
@@ -128,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
             currentIndex = (currentIndex - 1 + artFiles.length) % artFiles.length;
             showImage(currentIndex);
             lazyLoadImage(currentIndex - 1);
-        }, 500); // Reduced time to 1 second for fading effect
+        }, 500);
     }
 
     function loadGallery() {
@@ -138,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function() {
             galleryImg.alt = `Artwork ${index + 1}`;
             galleryImg.addEventListener('click', function() {
                 isClicked = true;
-                clearInterval(intervalId); // Clear any existing interval
+                clearInterval(intervalId);
                 showImageForDuration(index, 30000);
                 scrollToTop();
             });
@@ -173,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function startAutoRotation() {
-        clearInterval(intervalId); // Clear any existing interval
+        clearInterval(intervalId);
         intervalId = setInterval(showNextImage, 4000);
     }
 
@@ -225,11 +231,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listeners for arrow keys
     document.addEventListener('keydown', function(event) {
         if (event.key === 'ArrowRight') {
-            clearInterval(intervalId); // Clear any existing interval
+            clearInterval(intervalId);
             showNextImage();
             startAutoRotation();
         } else if (event.key === 'ArrowLeft') {
-            clearInterval(intervalId); // Clear any existing interval
+            clearInterval(intervalId);
             showPrevImage();
             startAutoRotation();
         }
@@ -258,11 +264,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 showPrevImage();
                 startAutoRotation();
             }
-            startX = 0; // Reset startX
+            startX = 0;
         }
     });
 
     artDisplay.addEventListener('touchend', function() {
-        startX = 0; // Reset startX
+        startX = 0;
     });
 });
