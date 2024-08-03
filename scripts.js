@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 initialImgSrc = 'impressionist/art1.jpg';
                 break;
             default:
-                initialImgSrc = 'art1.jpg';
+                initialImgSrc = 'main/art1.jpg';
                 break;
         }
         const initialImg = new Image();
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     fileName = `impressionist/art${i}.jpg`;
                     break;
                 default:
-                    fileName = `art${i}.jpg`;
+                    fileName = `main/art${i}.jpg`;
                     break;
             }
             if (await imageExists(fileName)) {
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
             currentIndex = (currentIndex + 1) % artFiles.length;
             showImage(currentIndex);
             lazyLoadImage(currentIndex + 1);
-        }, 500);
+        }, 500); // Reduced time to 1 second for fading effect
     }
 
     function showPrevImage() {
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
             currentIndex = (currentIndex - 1 + artFiles.length) % artFiles.length;
             showImage(currentIndex);
             lazyLoadImage(currentIndex - 1);
-        }, 500);
+        }, 500); // Reduced time to 1 second for fading effect
     }
 
     function loadGallery() {
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function() {
             galleryImg.alt = `Artwork ${index + 1}`;
             galleryImg.addEventListener('click', function() {
                 isClicked = true;
-                clearInterval(intervalId);
+                clearInterval(intervalId); // Clear any existing interval
                 showImageForDuration(index, 30000);
                 scrollToTop();
             });
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function startAutoRotation() {
-        clearInterval(intervalId);
+        clearInterval(intervalId); // Clear any existing interval
         intervalId = setInterval(showNextImage, 4000);
     }
 
@@ -231,11 +231,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listeners for arrow keys
     document.addEventListener('keydown', function(event) {
         if (event.key === 'ArrowRight') {
-            clearInterval(intervalId);
+            clearInterval(intervalId); // Clear any existing interval
             showNextImage();
             startAutoRotation();
         } else if (event.key === 'ArrowLeft') {
-            clearInterval(intervalId);
+            clearInterval(intervalId); // Clear any existing interval
             showPrevImage();
             startAutoRotation();
         }
@@ -264,11 +264,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 showPrevImage();
                 startAutoRotation();
             }
-            startX = 0;
+            startX = 0; // Reset startX
         }
     });
 
     artDisplay.addEventListener('touchend', function() {
-        startX = 0;
+        startX = 0; // Reset startX
     });
 });
