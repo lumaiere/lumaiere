@@ -84,12 +84,13 @@ header p {
     text-decoration: underline;
 }
 
+/* New styles for Prompt Magic Gallery */
 #prompt-magic-gallery {
-    display: grid;
+    display: none; /* Hide by default */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
-    opacity: 0;
+    opacity: 1; /* Make visible by default */
     transition: opacity 0.5s ease-in-out;
 }
 

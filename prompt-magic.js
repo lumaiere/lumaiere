@@ -17,17 +17,20 @@ document.addEventListener("DOMContentLoaded", function() {
             const item = document.createElement('div');
             item.className = 'prompt-magic-item';
             
-            const img = document.createElement('img');
+            const img = new Image();
             img.src = `prompt-magic/${file}.jpg`;
             img.alt = file;
+            img.addEventListener('load', () => {
+                item.appendChild(img);
+                const p = document.createElement('p');
+                p.textContent = file;
+                item.appendChild(p);
+                promptMagicGallery.appendChild(item);
+            });
+            img.addEventListener('error', () => {
+                console.error(`Failed to load image: ${file}.jpg`);
+            });
             img.addEventListener('click', () => showFullscreenImage(img.src));
-            
-            const p = document.createElement('p');
-            p.textContent = file;
-            
-            item.appendChild(img);
-            item.appendChild(p);
-            promptMagicGallery.appendChild(item);
         });
         promptMagicGallery.style.opacity = '1';
     }
