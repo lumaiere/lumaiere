@@ -13,6 +13,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     const galleryType = urlParams.get('gallery') || 'main'; // Default to 'main' gallery
 
+    if (galleryType === 'prompt-magic') {
+        const script = document.createElement('script');
+        script.src = 'prompt-magic.js';
+        document.head.appendChild(script);
+        return; // Exit early to prevent loading other gallery types
+    }
+        
     async function imageExists(src) {
         return new Promise(resolve => {
             const img = new Image();
