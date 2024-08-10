@@ -18,10 +18,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const galleryType = urlParams.get('gallery') || 'main';
 
     const promptMagicFiles = [
-        "a barber", "a clown", "a dolphin", "a man", "a priest", "a rabbi",
+        "a barber", "a clown", "a dolphin", "a man", "a woman", "a priest", "a rabbi", "an Imam",
         "a surfer shooting the tube of a massive 20 foot wave while a dolphin jumps out in front of him",
-        "a surfer", "a woman", "a face", "a tree", "an Imam", "bad", "dark", "good",
-        "hate", "heaven", "hell", "light", "love", "stepping into infinity", "the ultimate boss"
+        "a surfer", "a face", "a tree", "bad", "good", "hate", "love",
+        "heaven", "hell", "dark", "light", "stepping into infinity", "the ultimate boss"
     ];
 
     function loadPromptMagicGallery() {
