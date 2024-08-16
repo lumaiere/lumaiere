@@ -113,6 +113,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 case 'dragon':
                     initialImgSrc = 'dragon/art1.jpg';
                     break;
+                case 'breathtaking':
+                    initialImgSrc = 'breathtaking/art1.jpg';
+                    break;
                 default:
                     initialImgSrc = 'main/art1.jpg';
                     break;
@@ -149,6 +152,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         break;
                     case 'dragon':
                         fileName = `dragon/art${i}.jpg`;
+                        break;
+                    case 'breathtaking':
+                        fileName = `breathtaking/art${i}.jpg`;
                         break;
                     default:
                         fileName = `main/art${i}.jpg`;
