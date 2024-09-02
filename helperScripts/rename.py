@@ -14,7 +14,7 @@ def rename_files():
     
     # Extract existing art numbers
     existing_numbers = set()
-    pattern = re.compile(r'^art(\d+)\.jpg$')
+    pattern = re.compile(r'^art(\d+)\.jpg$')  # Only look for .jpg files here
     
     for file in files:
         match = pattern.match(file)
@@ -23,12 +23,12 @@ def rename_files():
     
     # Rename files
     for file in files:
-        # Skip rename.py and correctly named files
+        # Skip rename.py and correctly named .jpg files
         if file == 'rename.py' or pattern.match(file):
             continue
         
-        # Check if it's a .jpg file
-        if file.lower().endswith('.jpg'):
+        # Check if it's a .jpg or .jpeg file
+        if file.lower().endswith('.jpg') or file.lower().endswith('.jpeg'):
             next_number = get_next_available_number(existing_numbers)
             new_name = f'art{next_number}.jpg'
             
