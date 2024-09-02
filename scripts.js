@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const artDisplay = document.getElementById("art-display");
     const galleryView = document.getElementById("gallery-view");
     const galleryLinks = document.getElementById("gallery-links");
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
         promptMagicFiles.forEach(file => {
             const item = document.createElement('div');
             item.className = 'prompt-magic-item';
-            
+
             const img = new Image();
             img.src = `prompt-magic/${file}.jpg`;
             img.alt = file;
@@ -62,14 +62,14 @@ document.addEventListener("DOMContentLoaded", function() {
         artDisplay.style.display = 'none';
         galleryView.style.display = 'none';
         promptMagicGallery.style.display = 'grid';
-        
+
         loadPromptMagicGallery();
     } else {
         // Hide Prompt Magic gallery, show other galleries
         promptMagicGallery.style.display = 'none';
         artDisplay.style.display = 'flex';
         galleryView.style.display = 'flex';
-        
+
         // Continue with existing gallery logic
         async function imageExists(src) {
             return new Promise(resolve => {
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
             img.src = artFiles[index];
             img.classList.add('fade'); // Add class for fade effect
 
-            img.onload = function() {
+            img.onload = function () {
                 artDisplay.innerHTML = '';
                 artDisplay.appendChild(img);
                 adjustImageSize(img);
@@ -119,6 +119,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 case 'unicorns':
                     initialImgSrc = 'unicorns/art1.jpg';
                     break;
+                case 'gemini':
+                    initialImgSrc = 'gemini/art1.jpg';
+                    break;
                 default:
                     initialImgSrc = 'main/art1.jpg';
                     break;
@@ -127,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
             initialImg.src = initialImgSrc; // Load the first image based on gallery type
             initialImg.classList.add('fade'); // Add class for fade effect
 
-            initialImg.onload = function() {
+            initialImg.onload = function () {
                 artDisplay.innerHTML = '';
                 artDisplay.appendChild(initialImg);
                 adjustImageSize(initialImg);
@@ -161,6 +164,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         break;
                     case 'unicorns':
                         fileName = `unicorns/art${i}.jpg`;
+                        break;
+                    case 'gemini':
+                        fileName = `gemini/art${i}.jpg`;
                         break;
                     default:
                         fileName = `main/art${i}.jpg`;
@@ -218,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const galleryImg = new Image();
                 galleryImg.src = file;
                 galleryImg.alt = `Artwork ${index + 1}`;
-                galleryImg.addEventListener('click', function() {
+                galleryImg.addEventListener('click', function () {
                     isClicked = true;
                     clearInterval(intervalId); // Clear any existing interval
                     showImageForDuration(index, 30000);
@@ -239,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const img = new Image();
             img.src = artFiles[index];
             img.classList.add('fade');
-            img.onload = function() {
+            img.onload = function () {
                 artDisplay.innerHTML = '';
                 artDisplay.appendChild(img);
                 adjustImageSize(img);
@@ -259,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function() {
             intervalId = setInterval(showNextImage, 4000);
         }
 
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const scrollTop = window.scrollY;
 
             if (scrollTop > 0) {
@@ -271,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
             adjustImageSize();
         });
 
@@ -305,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function() {
         requestAnimationFrame(loadArtFiles);
 
         // Event listeners for arrow keys
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
             if (event.key === 'ArrowRight') {
                 clearInterval(intervalId); // Clear any existing interval
                 showNextImage();
@@ -318,11 +324,11 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         // Touch event listeners for swipe gestures
-        artDisplay.addEventListener('touchstart', function(event) {
+        artDisplay.addEventListener('touchstart', function (event) {
             startX = event.touches[0].clientX;
         });
 
-        artDisplay.addEventListener('touchmove', function(event) {
+        artDisplay.addEventListener('touchmove', function (event) {
             if (!startX) return;
 
             const endX = event.touches[0].clientX;
@@ -344,7 +350,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        artDisplay.addEventListener('touchend', function() {
+        artDisplay.addEventListener('touchend', function () {
             startX = 0; // Reset startX
         });
     }
