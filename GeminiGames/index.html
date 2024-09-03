@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Click the Box Game</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+
+  <script>
+    const box = document.getElementById('box');
+    let score = 0;
+
+    box.addEventListener('click', () => {
+      score++;
+      alert('You clicked the box! Score: ' + score);
+
+      // Move the box to a random position
+      const maxWidth = window.innerWidth - box.offsetWidth;
+      const maxHeight = window.innerHeight - box.offsetHeight;
+      box.style.left = Math.random() * maxWidth + 'px';
+      box.style.top = Math.random() * maxHeight + 'px';
+    });
+  </script>
+</body>
+</html>
