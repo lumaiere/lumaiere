@@ -128,6 +128,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 case 'grok':
                     initialImgSrc = 'grok/art1.jpg';
                     break;
+                case 'beauty':
+                    initialImgSrc = 'beauty/art1.jpg';
+                    break;
                 default:
                     initialImgSrc = 'main/art1.jpg';
                     break;
@@ -179,6 +182,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         break;
                     case 'grok':
                         fileName = `grok/art${i}.jpg`;
+                        break;
+                    case 'beauty':
+                        fileName = `beauty/art${i}.jpg`;
                         break;
                     default:
                         fileName = `main/art${i}.jpg`;
