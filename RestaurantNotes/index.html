@@ -1,70 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Restaurant Notes</title>
-<style>
-    body { font-family: 'Arial', sans-serif; margin: 20px; }
-    #restaurantList { margin-top: 20px; }
-    .restaurant { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
-    .note { width: 100%; box-sizing: border-box; margin-top: 5px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Notes</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <h1>My Restaurant Notes</h1>
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search for restaurants...">
+    <button onclick="searchRestaurants()">Search</button>
+</div>
 <button id="addRestaurant">+ Add Restaurant</button>
 
 <div id="restaurantList"></div>
 
-<script>
-document.getElementById('addRestaurant').addEventListener('click', function() {
-    const name = prompt("Enter restaurant name:");
-    if (name) {
-        let restaurants = JSON.parse(localStorage.getItem('restaurants') || "[]");
-        restaurants.push({name: name, notes: ""});
-        localStorage.setItem('restaurants', JSON.stringify(restaurants));
-        loadRestaurants();
-    }
-});
-
-function loadRestaurants() {
-    const restaurants = JSON.parse(localStorage.getItem('restaurants') || "[]");
-    const listDiv = document.getElementById('restaurantList');
-    listDiv.innerHTML = '';
-    
-    restaurants.forEach((resto, index) => {
-        const div = document.createElement('div');
-        div.className = 'restaurant';
-        div.innerHTML = `<h3>${resto.name}</h3>
-                         <textarea class="note" data-index="${index}" placeholder="Enter your notes here...">${resto.notes}</textarea>
-                         <button onclick="deleteRestaurant(${index})">Delete</button>`;
-        listDiv.appendChild(div);
-    });
-
-    // Add event listeners for notes
-    document.querySelectorAll('.note').forEach(textarea => {
-        textarea.addEventListener('blur', function() {
-            const index = this.getAttribute('data-index');
-            const newNote = this.value;
-            let restaurants = JSON.parse(localStorage.getItem('restaurants'));
-            restaurants[index].notes = newNote;
-            localStorage.setItem('restaurants', JSON.stringify(restaurants));
-        });
-    });
-}
-
-function deleteRestaurant(index) {
-    let restaurants = JSON.parse(localStorage.getItem('restaurants'));
-    restaurants.splice(index, 1);
-    localStorage.setItem('restaurants', JSON.stringify(restaurants));
-    loadRestaurants();
-}
-
-// Initial load
-loadRestaurants();
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
