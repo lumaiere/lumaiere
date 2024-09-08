@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const addButton = document.getElementById('addRestaurant');
+    const restaurantList = document.getElementById('restaurantList');
 
-    // Add event listener for adding a new restaurant
     addButton.addEventListener('click', function() {
         const name = prompt("Enter restaurant name:");
         if (name) {
             let restaurants = JSON.parse(localStorage.getItem('restaurants') || "[]");
-            restaurants.push({name: name, notes: ""});
+            // Add new restaurant at the beginning
+            restaurants.unshift({name: name, notes: ""});
             localStorage.setItem('restaurants', JSON.stringify(restaurants));
             loadRestaurants();
         }
@@ -15,8 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadRestaurants(filter = '') {
         const restaurants = JSON.parse(localStorage.getItem('restaurants') || "[]");
-        const listDiv = document.getElementById('restaurantList');
-        listDiv.innerHTML = '';
+        restaurantList.innerHTML = '';
 
         const filteredRestaurants = restaurants.filter(resto => 
             resto.name.toLowerCase().includes(filter.toLowerCase())
@@ -30,8 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 <textarea class="note" data-index="${index}" placeholder="Enter your notes here...">${resto.notes}</textarea>
                 <button class="delete-btn" onclick="deleteRestaurant(${index})">Delete</button>
             `;
-            listDiv.appendChild(div);
+            restaurantList.insertBefore(div, restaurantList.firstChild); // Add at the top
         });
+
+        // Focus on the first textarea (newly added restaurant's notes)
+        const firstNote = document.querySelector('.note');
+        if (firstNote) {
+            firstNote.focus();
+        }
 
         document.querySelectorAll('.note').forEach(textarea => {
             textarea.addEventListener('blur', function() {
