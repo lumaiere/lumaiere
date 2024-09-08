@@ -28,13 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.innerHTML = `
                     <h3>${resto.name}</h3>
                     <textarea class="note" data-index="${index}" placeholder="Enter your notes here...">${resto.notes}</textarea>
-                    <button class="delete-btn" onclick="deleteRestaurant(${index})">Delete</button>
+                    <button class="delete-btn" data-index="${index}" data-name="${resto.name}">Delete</button>
                 `;
                 restaurantList.appendChild(div);
-                // Add event listener for delete button here to ensure it's bound correctly
                 div.querySelector('.delete-btn').addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent default button behavior if any
-                    deleteRestaurant(index);
+                    event.preventDefault();
+                    const index = this.getAttribute('data-index');
+                    const name = this.getAttribute('data-name');
+                    deleteRestaurant(index, name);
                 });
             });
 
@@ -64,8 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loadRestaurants(filter);
     }
 
-    function deleteRestaurant(index) {
-        if (confirm("Are you sure you want to delete this restaurant? This action cannot be undone.")) {
+    function deleteRestaurant(index, name) {
+        if (confirm(`Are you sure you want to delete ${name}? This action cannot be undone.`)) {
             let restaurants = JSON.parse(localStorage.getItem('restaurants'));
             restaurants.splice(index, 1);
             localStorage.setItem('restaurants', JSON.stringify(restaurants));
@@ -79,4 +80,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Exporting functions for global use if needed
 window.searchRestaurants = searchRestaurants;
-window.deleteRestaurant = deleteRestaurant;
