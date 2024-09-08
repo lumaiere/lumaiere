@@ -70,10 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalName = document.getElementById('modalRestaurantName');
         const confirmBtn = document.getElementById('confirmDelete');
         const cancelBtn = document.getElementById('cancelDelete');
-    
+
         modalName.textContent = name;
         modal.style.display = "block";
-    
+
         confirmBtn.onclick = function() {
             let restaurants = JSON.parse(localStorage.getItem('restaurants'));
             restaurants.splice(index, 1);
@@ -81,25 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = "none";
             loadRestaurants();
         };
-    
+
         cancelBtn.onclick = function() {
             modal.style.display = "none";
         };
-    
-        document.getElementsByClassName("close")[0].onclick = function() {
-            modal.style.display = "none";
-        };
-    
+
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         };
     }
-    
+
     // Initial load of restaurants
     loadRestaurants();
-    });
-    
-    // Exporting functions for global use if needed
-    window.searchRestaurants = searchRestaurants;
+});
+
+// Exporting functions for global use if needed
+window.searchRestaurants = searchRestaurants;
