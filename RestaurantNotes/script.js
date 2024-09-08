@@ -7,10 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = prompt("Enter restaurant name:");
         if (name) {
             let restaurants = JSON.parse(localStorage.getItem('restaurants') || "[]");
-            // Add new restaurant at the beginning
             restaurants.unshift({name: name, notes: ""});
             localStorage.setItem('restaurants', JSON.stringify(restaurants));
-            // Load restaurants and focus on the new item's notes
             loadRestaurants().then(focusOnNewNote);
         }
     });
@@ -32,10 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <textarea class="note" data-index="${index}" placeholder="Enter your notes here...">${resto.notes}</textarea>
                     <button class="delete-btn" onclick="deleteRestaurant(${index})">Delete</button>
                 `;
-                restaurantList.appendChild(div); // Append to add at the bottom
+                restaurantList.appendChild(div);
+                // Add event listener for delete button here to ensure it's bound correctly
+                div.querySelector('.delete-btn').addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default button behavior if any
+                    deleteRestaurant(index);
+                });
             });
 
-            // Add event listeners for notes
             document.querySelectorAll('.note').forEach(textarea => {
                 textarea.addEventListener('blur', function() {
                     const index = this.getAttribute('data-index');
@@ -63,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function deleteRestaurant(index) {
-        if (confirm("Are you sure you want to delete this restaurant?")) {
+        if (confirm("Are you sure you want to delete this restaurant? This action cannot be undone.")) {
             let restaurants = JSON.parse(localStorage.getItem('restaurants'));
             restaurants.splice(index, 1);
             localStorage.setItem('restaurants', JSON.stringify(restaurants));
