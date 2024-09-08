@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
+    const addButton = document.getElementById('addRestaurant');
 
-    document.getElementById('addRestaurant').addEventListener('click', function() {
+    // Add event listener for adding a new restaurant
+    addButton.addEventListener('click', function() {
         const name = prompt("Enter restaurant name:");
         if (name) {
             let restaurants = JSON.parse(localStorage.getItem('restaurants') || "[]");
@@ -15,21 +17,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const restaurants = JSON.parse(localStorage.getItem('restaurants') || "[]");
         const listDiv = document.getElementById('restaurantList');
         listDiv.innerHTML = '';
-        
-        const filteredRestaurants = filter 
-            ? restaurants.filter(resto => resto.name.toLowerCase().includes(filter.toLowerCase()))
-            : restaurants;
+
+        const filteredRestaurants = restaurants.filter(resto => 
+            resto.name.toLowerCase().includes(filter.toLowerCase())
+        );
 
         filteredRestaurants.forEach((resto, index) => {
             const div = document.createElement('div');
             div.className = 'restaurant';
-            div.innerHTML = `<h3>${resto.name}</h3>
-                             <textarea class="note" data-index="${index}" placeholder="Enter your notes here...">${resto.notes}</textarea>
-                             <button class="delete-btn" onclick="deleteRestaurant(${index})">Delete</button>`;
+            div.innerHTML = `
+                <h3>${resto.name}</h3>
+                <textarea class="note" data-index="${index}" placeholder="Enter your notes here...">${resto.notes}</textarea>
+                <button class="delete-btn" onclick="deleteRestaurant(${index})">Delete</button>
+            `;
             listDiv.appendChild(div);
         });
 
-        // Add event listeners for notes
         document.querySelectorAll('.note').forEach(textarea => {
             textarea.addEventListener('blur', function() {
                 const index = this.getAttribute('data-index');
@@ -42,29 +45,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function searchRestaurants() {
-        const filter = searchInput.value;
+        const filter = searchInput.value.trim();
         loadRestaurants(filter);
     }
 
     function deleteRestaurant(index) {
-        let restaurants = JSON.parse(localStorage.getItem('restaurants'));
-        const deletedRestaurant = restaurants.splice(index, 1)[0];
-        localStorage.setItem('restaurants', JSON.stringify(restaurants));
-        loadRestaurants();
-
-        // Undo functionality
-        setTimeout(() => {
-            if (confirm("Do you want to undo the deletion?")) {
-                restaurants.splice(index, 0, deletedRestaurant);
-                localStorage.setItem('restaurants', JSON.stringify(restaurants));
-                loadRestaurants();
-            }
-        }, 100); // Immediate prompt for undo
+        if (confirm("Are you sure you want to delete this restaurant?")) {
+            let restaurants = JSON.parse(localStorage.getItem('restaurants'));
+            restaurants.splice(index, 1);
+            localStorage.setItem('restaurants', JSON.stringify(restaurants));
+            loadRestaurants();
+        }
     }
 
-    // Initial load
+    // Initial load of restaurants
     loadRestaurants();
 });
 
+// Exporting functions for global use if needed
 window.searchRestaurants = searchRestaurants;
 window.deleteRestaurant = deleteRestaurant;
