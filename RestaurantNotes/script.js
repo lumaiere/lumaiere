@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add new restaurant at the beginning
             restaurants.unshift({name: name, notes: ""});
             localStorage.setItem('restaurants', JSON.stringify(restaurants));
-            loadRestaurants();
+            // Load restaurants and focus on the new item's notes
+            loadRestaurants().then(focusOnNewNote);
         }
     });
 
@@ -22,32 +23,38 @@ document.addEventListener('DOMContentLoaded', () => {
             resto.name.toLowerCase().includes(filter.toLowerCase())
         );
 
-        filteredRestaurants.forEach((resto, index) => {
-            const div = document.createElement('div');
-            div.className = 'restaurant';
-            div.innerHTML = `
-                <h3>${resto.name}</h3>
-                <textarea class="note" data-index="${index}" placeholder="Enter your notes here...">${resto.notes}</textarea>
-                <button class="delete-btn" onclick="deleteRestaurant(${index})">Delete</button>
-            `;
-            restaurantList.insertBefore(div, restaurantList.firstChild); // Add at the top
-        });
-
-        // Focus on the first textarea (newly added restaurant's notes)
-        const firstNote = document.querySelector('.note');
-        if (firstNote) {
-            firstNote.focus();
-        }
-
-        document.querySelectorAll('.note').forEach(textarea => {
-            textarea.addEventListener('blur', function() {
-                const index = this.getAttribute('data-index');
-                const newNote = this.value;
-                let restaurants = JSON.parse(localStorage.getItem('restaurants'));
-                restaurants[index].notes = newNote;
-                localStorage.setItem('restaurants', JSON.stringify(restaurants));
+        return new Promise(resolve => {
+            filteredRestaurants.forEach((resto, index) => {
+                const div = document.createElement('div');
+                div.className = 'restaurant';
+                div.innerHTML = `
+                    <h3>${resto.name}</h3>
+                    <textarea class="note" data-index="${index}" placeholder="Enter your notes here...">${resto.notes}</textarea>
+                    <button class="delete-btn" onclick="deleteRestaurant(${index})">Delete</button>
+                `;
+                restaurantList.appendChild(div); // Append to add at the bottom
             });
+
+            // Add event listeners for notes
+            document.querySelectorAll('.note').forEach(textarea => {
+                textarea.addEventListener('blur', function() {
+                    const index = this.getAttribute('data-index');
+                    const newNote = this.value;
+                    let restaurants = JSON.parse(localStorage.getItem('restaurants'));
+                    restaurants[index].notes = newNote;
+                    localStorage.setItem('restaurants', JSON.stringify(restaurants));
+                });
+            });
+
+            resolve();
         });
+    }
+
+    function focusOnNewNote() {
+        const notes = document.querySelectorAll('.note');
+        if (notes.length > 0) {
+            notes[0].focus();
+        }
     }
 
     function searchRestaurants() {
