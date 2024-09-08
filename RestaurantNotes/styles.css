@@ -26,16 +26,6 @@ h1 {
     font-size: 14px; /* Slightly smaller for notes */
 }
 
-.search-container {
-    margin: 20px 0;
-}
-
-#searchInput {
-    width: 70%;
-    padding: 10px;
-    font-size: 14px;
-}
-
 button {
     padding: 10px 20px;
     background-color: #007BFF;
@@ -101,7 +91,7 @@ button {
         font-size: 24px;
     }
 
-    .note, #searchInput, button {
+    .note, button {
         font-size: 12px;
     }
 

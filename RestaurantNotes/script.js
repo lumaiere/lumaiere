@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('searchInput');
     const addButton = document.getElementById('addRestaurant');
     const restaurantList = document.getElementById('restaurantList');
 
@@ -13,16 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function loadRestaurants(filter = '') {
+    function loadRestaurants() {
         const restaurants = JSON.parse(localStorage.getItem('restaurants') || "[]");
         restaurantList.innerHTML = '';
 
-        const filteredRestaurants = restaurants.filter(resto => 
-            resto.name.toLowerCase().includes(filter.toLowerCase())
-        );
-
         return new Promise(resolve => {
-            filteredRestaurants.forEach((resto, index) => {
+            restaurants.forEach((resto, index) => {
                 const div = document.createElement('div');
                 div.className = 'restaurant';
                 div.innerHTML = `
@@ -60,11 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function searchRestaurants() {
-        const filter = searchInput.value.trim();
-        loadRestaurants(filter);
-    }
-
     function deleteRestaurant(index, name) {
         const modal = document.getElementById('deleteModal');
         const modalName = document.getElementById('modalRestaurantName');
@@ -96,6 +86,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial load of restaurants
     loadRestaurants();
 });
-
-// Exporting functions for global use if needed
-window.searchRestaurants = searchRestaurants;
