@@ -2,21 +2,35 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 20px;
     font-size: 16px; /* Base font size for better readability on mobile */
+    background-image: url('../grok/art36.jpg'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #333; /* Ensure text color contrasts with the background */
 }
 
 h1 {
     text-align: center;
     color: #333;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for better readability */
+    padding: 10px;
+    border-radius: 8px;
 }
 
 #restaurantList {
     margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .restaurant {
     border: 1px solid #ccc;
     padding: 15px;
     margin: 15px 0;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    border-radius: 8px;
 }
 
 .note {
@@ -33,6 +47,7 @@ button {
     border: none;
     cursor: pointer;
     font-size: 14px;
+    border-radius: 4px;
 }
 
 .delete-btn {
@@ -43,6 +58,7 @@ button {
     cursor: pointer;
     margin-top: 10px;
     font-size: 12px;
+    border-radius: 4px;
 }
 
 /* Modal styles */
@@ -66,6 +82,7 @@ button {
     width: 80%; 
     max-width: 400px; /* Limit the width for better mobile viewing */
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds a subtle shadow for depth */
 }
 
 .modal-buttons {
@@ -79,6 +96,7 @@ button {
     margin: 0 5px;
     padding: 10px;
     font-size: 14px;
+    border-radius: 4px;
 }
 
 /* Ensure font sizes are readable on mobile */
