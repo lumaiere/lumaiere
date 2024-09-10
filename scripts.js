@@ -131,6 +131,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 case 'beauty':
                     initialImgSrc = 'beauty/art1.jpg';
                     break;
+                case 'nude':
+                    initialImgSrc = 'nude/art1.jpg';
+                    break;
                 default:
                     initialImgSrc = 'main/art1.jpg';
                     break;
@@ -185,6 +188,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         break;
                     case 'beauty':
                         fileName = `beauty/art${i}.jpg`;
+                        break;
+                    case 'nude':
+                        fileName = `nude/art${i}.jpg`;
                         break;
                     default:
                         fileName = `main/art${i}.jpg`;
