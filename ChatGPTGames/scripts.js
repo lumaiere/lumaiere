@@ -13,9 +13,14 @@ let dy = -2;
 
 let rightPressed = false;
 let leftPressed = false;
+let touchStartX = null;
+let touchEndX = null;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("touchstart", touchStartHandler, false);
+document.addEventListener("touchmove", touchMoveHandler, false);
+window.addEventListener("deviceorientation", handleOrientation, true);
 
 function keyDownHandler(e) {
     if (e.key == "Right" || e.key == "ArrowRight") {
@@ -30,6 +35,39 @@ function keyUpHandler(e) {
         rightPressed = false;
     } else if (e.key == "Left" || e.key == "ArrowLeft") {
         leftPressed = false;
+    }
+}
+
+function touchStartHandler(e) {
+    touchStartX = e.touches[0].clientX;
+}
+
+function touchMoveHandler(e) {
+    touchEndX = e.touches[0].clientX;
+    const diffX = touchEndX - touchStartX;
+
+    if (diffX > 0) {
+        // Swipe right
+        if (paddleX < canvas.width - paddleWidth) {
+            paddleX += 7;
+        }
+    } else if (diffX < 0) {
+        // Swipe left
+        if (paddleX > 0) {
+            paddleX -= 7;
+        }
+    }
+
+    touchStartX = touchEndX; // Reset touch start for smoother swipes
+}
+
+function handleOrientation(event) {
+    const tiltLR = event.gamma; // left to right tilt (-90 to 90)
+
+    if (tiltLR > 15 && paddleX < canvas.width - paddleWidth) {
+        paddleX += 7;
+    } else if (tiltLR < -15 && paddleX > 0) {
+        paddleX -= 7;
     }
 }
 
