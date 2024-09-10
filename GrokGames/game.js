@@ -126,5 +126,38 @@ document.addEventListener('keyup', (e) => {
     if(e.key === 'ArrowLeft' || e.key === 'ArrowRight') player.dx = 0;
 });
 
+// Touch events for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+canvas.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+});
+
+canvas.addEventListener('touchmove', (e) => {
+    touchEndX = e.touches[0].clientX;
+    player.dx = (touchEndX - touchStartX) / 5; // Adjust sensitivity
+});
+
+canvas.addEventListener('touchend', () => {
+    player.dx = 0;
+});
+
+// Tilt controls
+window.addEventListener('deviceorientation', (e) => {
+    if (e.gamma) { // e.gamma for left-to-right tilt
+        player.dx = e.gamma / 10; // Adjust sensitivity
+    }
+});
+
+// Fire bullet on tap
+canvas.addEventListener('click', () => {
+    if (!bullet.fired) {
+        bullet.x = player.x + player.width / 2 - bullet.width / 2;
+        bullet.y = player.y;
+        bullet.fired = true;
+    }
+});
+
 // Start the game
 gameLoop();
