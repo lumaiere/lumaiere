@@ -1,4 +1,4 @@
 .DS_Store
 rename.py
 !helperScripts/*
-scratch.txt
+scratch*
