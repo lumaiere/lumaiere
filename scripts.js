@@ -113,6 +113,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 case 'impressionist2':
                     initialImgSrc = 'impressionist2/art1.jpg';
                     break;
+                case 'impressionist3':
+                    initialImgSrc = 'impressionist3/art1.jpg';
+                    break;
                 case 'dragon':
                     initialImgSrc = 'dragon/art1.jpg';
                     break;
@@ -173,6 +176,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         break;
                     case 'impressionist2':
                         fileName = `impressionist2/art${i}.jpg`;
+                        break;
+                    case 'impressionist3':
+                        fileName = `impressionist3/art${i}.jpg`;
                         break;
                     case 'dragon':
                         fileName = `dragon/art${i}.jpg`;
