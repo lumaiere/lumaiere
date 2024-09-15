@@ -1,5 +1,5 @@
 ## Demystifying WordPress: Your Gateway to Online Domination
-
+![cat](https://lumaiere.com/cats/art3.jpg)
 **Why, oh why, should I care about this thing called WordPress?**
 
 Picture this: You've got brilliant ideas, insightful musings, or maybe just a burning desire to share your cat's latest antics with the world. But how do you translate those thoughts into a visually appealing, easy-to-navigate website without needing a degree in computer science? Enter WordPress, your knight in shining armor (or, more accurately, your user-friendly content management system). It's like having a website-building superpower, minus the spandex.
