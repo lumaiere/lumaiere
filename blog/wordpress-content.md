@@ -39,7 +39,7 @@ Engaging with your audience is key to building a loyal following and fostering a
 
 **Remember: The Official WordPress Documentation is Your Friend! 📚**
 
-The official WordPress documentation offers a wealth of information on creating and managing content: [invalid URL removed]
+The official WordPress documentation offers a wealth of information on creating and managing content: https://learn.wordpress.org/
 
 **The Adventure Continues! 🧭**
 
