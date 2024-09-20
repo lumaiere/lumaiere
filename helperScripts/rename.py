@@ -28,7 +28,7 @@ def rename_files():
             continue
         
         # Check if it's a .jpg or .jpeg file
-        if file.lower().endswith('.jpg') or file.lower().endswith('.jpeg'):
+        if file.lower().endswith('.jpg') or file.lower().endswith('.jpeg') or file.lower().endswith('.webp'):
             next_number = get_next_available_number(existing_numbers)
             new_name = f'art{next_number}.jpg'
             
