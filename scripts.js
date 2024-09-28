@@ -137,6 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 case 'nude':
                     initialImgSrc = 'nude/art1.jpg';
                     break;
+                case 'nude2':
+                    initialImgSrc = 'nude2/art1.jpg';
+                    break;
                 case 'cats':
                     initialImgSrc = 'cats/art1.jpg';
                     break;
@@ -206,6 +209,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         break;
                     case 'nude':
                         fileName = `nude/art${i}.jpg`;
+                        break;
+                    case 'nude2':
+                        fileName = `nude2/art${i}.jpg`;
                         break;
                     case 'cats':
                         fileName = `cats/art${i}.jpg`;
