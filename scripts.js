@@ -104,51 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 case 'laugh':
                     initialImgSrc = 'share-a-laugh-with-friends/art1.jpg';
                     break;
-                case 'avenues':
-                    initialImgSrc = 'avenues/art1.jpg';
-                    break;
-                case 'impressionist':
-                    initialImgSrc = 'impressionist/art1.jpg';
-                    break;
-                case 'impressionist2':
-                    initialImgSrc = 'impressionist2/art1.jpg';
-                    break;
-                case 'impressionist3':
-                    initialImgSrc = 'impressionist3/art1.jpg';
-                    break;
-                case 'dragon':
-                    initialImgSrc = 'dragon/art1.jpg';
-                    break;
-                case 'breathtaking':
-                    initialImgSrc = 'breathtaking/art1.jpg';
-                    break;
-                case 'unicorns':
-                    initialImgSrc = 'unicorns/art1.jpg';
-                    break;
-                case 'gemini':
-                    initialImgSrc = 'gemini/art1.jpg';
-                    break;
-                case 'grok':
-                    initialImgSrc = 'grok/art1.jpg';
-                    break;
-                case 'beauty':
-                    initialImgSrc = 'beauty/art1.jpg';
-                    break;
-                case 'nude':
-                    initialImgSrc = 'nude/art1.jpg';
-                    break;
-                case 'nude2':
-                    initialImgSrc = 'nude2/art1.jpg';
-                    break;
-                case 'cats':
-                    initialImgSrc = 'cats/art1.jpg';
-                    break;
-                case 'random':
-                    initialImgSrc = 'random/art1.jpg';
-                    break;
-                case 'eponymous':
-                    initialImgSrc = 'eponymous/art1.jpg';
-                    break;
                 default:
                     initialImgSrc = galleryType + '/art1.jpg';
                     break;
@@ -176,51 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         break;
                     case 'laugh':
                         fileName = `share-a-laugh-with-friends/art${i}.jpg`;
-                        break;
-                    case 'avenues':
-                        fileName = `avenues/art${i}.jpg`;
-                        break;
-                    case 'impressionist':
-                        fileName = `impressionist/art${i}.jpg`;
-                        break;
-                    case 'impressionist2':
-                        fileName = `impressionist2/art${i}.jpg`;
-                        break;
-                    case 'impressionist3':
-                        fileName = `impressionist3/art${i}.jpg`;
-                        break;
-                    case 'dragon':
-                        fileName = `dragon/art${i}.jpg`;
-                        break;
-                    case 'breathtaking':
-                        fileName = `breathtaking/art${i}.jpg`;
-                        break;
-                    case 'unicorns':
-                        fileName = `unicorns/art${i}.jpg`;
-                        break;
-                    case 'gemini':
-                        fileName = `gemini/art${i}.jpg`;
-                        break;
-                    case 'grok':
-                        fileName = `grok/art${i}.jpg`;
-                        break;
-                    case 'beauty':
-                        fileName = `beauty/art${i}.jpg`;
-                        break;
-                    case 'nude':
-                        fileName = `nude/art${i}.jpg`;
-                        break;
-                    case 'nude2':
-                        fileName = `nude2/art${i}.jpg`;
-                        break;
-                    case 'cats':
-                        fileName = `cats/art${i}.jpg`;
-                        break;
-                    case 'random':
-                        fileName = `random/art${i}.jpg`;
-                        break;
-                    case 'eponymous':
-                        fileName = `eponymous/art${i}.jpg`;
                         break;
                     default:
                         fileName = galleryType + `/art${i}.jpg`;
