@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     initialImgSrc = 'eponymous/art1.jpg';
                     break;
                 default:
-                    initialImgSrc = 'main/art1.jpg';
+                    initialImgSrc = galleryType + '/art1.jpg';
                     break;
             }
             const initialImg = new Image();
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         fileName = `eponymous/art${i}.jpg`;
                         break;
                     default:
-                        fileName = `main/art${i}.jpg`;
+                        fileName = galleryType + `/art${i}.jpg`;
                         break;
                 }
                 if (await imageExists(fileName)) {
