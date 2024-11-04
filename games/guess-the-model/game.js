@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const imagesContainer = document.getElementById('images-container');
-    const submitButton = document.getElementById('submit-guesses');
     const resultDiv = document.getElementById('result');
 
     const images = [
@@ -23,6 +22,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         {src: '../../eponymous/art17.jpg', model: 'ChatGPT'},
     ];
 
+    let currentImageIndex = 0;
+    let selectedModels = new Array(images.length).fill(null);
+
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -30,58 +32,52 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    let selectedModels = new Array(images.length).fill(null);
-    let correctAnswers = new Array(images.length).fill(null);
+    function showImage(index) {
+        if (index >= images.length) {
+            document.getElementById('model-buttons').style.display = 'none';
+            displayResults();
+            return;
+        }
 
-    function setupGame() {
-        shuffle(images);
+        const imgElement = document.createElement('img');
+        imgElement.src = images[index].src;
+        imgElement.classList.add('enlarged');
         imagesContainer.innerHTML = '';
-        images.forEach((img, index) => {
-            const imgElement = document.createElement('img');
-            imgElement.src = img.src;
-            imgElement.onclick = function() {
-                // Toggle between models or implement a selection mechanism
-                let currentModel = selectedModels[index];
-                let models = ['Gemini', 'ChatGPT', 'Grok', 'NightCafe', 'Deep Dream Generator'];
-                let nextModelIndex = (models.indexOf(currentModel) + 1) % models.length;
-                selectedModels[index] = models[nextModelIndex];
-                this.className = selectedModels[index].toLowerCase().replace(' ', '-');
+        imagesContainer.appendChild(imgElement);
+        document.getElementById('model-buttons').style.display = 'block';
+
+        document.querySelectorAll('#model-buttons button').forEach(button => {
+            button.onclick = function() {
+                let selectedModel = this.getAttribute('data-model');
+                selectedModels[index] = selectedModel;
+                imgElement.className = selectedModel.toLowerCase().replace(' ', '-');
+                imgElement.classList.remove('enlarged');
+                document.getElementById('model-buttons').style.display = 'none';
+                currentImageIndex++;
+                showImage(currentImageIndex);
             };
-            imagesContainer.appendChild(imgElement);
         });
     }
 
-    setupGame();
-
-    submitButton.onclick = function() {
+    function displayResults() {
         let correctGuesses = 0;
-        for(let i = 0; i < images.length; i++) {
-            if (selectedModels[i] === images[i].model) {
-                correctGuesses++;
-                correctAnswers[i] = true;
-            } else {
-                correctAnswers[i] = false;
-            }
-        }
-
-        resultDiv.innerHTML = `You guessed ${correctGuesses} out of ${images.length} correctly!`;
-        // Reveal correct answers
         let imagesHtml = '';
         images.forEach((img, index) => {
-            imagesHtml += `<div>${img.src} was made by ${correctAnswers[index] ? '<span style="color:green;">Correctly guessed!</span>' : '<span style="color:red;">Incorrectly guessed. It was ' + img.model + '</span>'}</div>`;
+            if (selectedModels[index] === img.model) {
+                correctGuesses++;
+                imagesHtml += `<div>${img.src} was made by <span style="color:green;">Correctly guessed!</span></div>`;
+            } else {
+                imagesHtml += `<div>${img.src} was made by <span style="color:red;">Incorrectly guessed. It was ${img.model}</span></div>`;
+            }
         });
-        resultDiv.innerHTML += '<br>' + imagesHtml;
+        resultDiv.innerHTML = `You guessed ${correctGuesses} out of ${images.length} correctly!<br>${imagesHtml}`;
+    }
 
-        // Enable social sharing
-        let shareButton = document.createElement('button');
-        shareButton.textContent = 'Share Your Score';
-        shareButton.onclick = function() {
-            // This is a placeholder for actual social media sharing functionality.
-            // Real implementation would involve actual APIs or share dialogs.
-            alert('Sharing functionality would go here. Your score: ' + correctGuesses);
-        };
-        resultDiv.appendChild(shareButton);
-    };
+    function setupGame() {
+        shuffle(images);
+        showImage(currentImageIndex);
+    }
 
-    // Reset game functionality can be added here if needed
+    // Call setupGame to initialize the game
+    setupGame();
 });

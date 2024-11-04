@@ -31,6 +31,16 @@ body {
     border-color: blue;
 }
 
+img:hover {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: auto;
+    z-index: 1000;
+}
+
 button {
     background-color: #4CAF50;
     border: none;
@@ -55,4 +65,24 @@ button {
         width: 70px;
         height: 70px;
     }
+}
+
+/* Add this to your styles.css */
+.enlarged {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: auto;
+    z-index: 1000;
+}
+
+#model-buttons {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    z-index: 1001;
 }
