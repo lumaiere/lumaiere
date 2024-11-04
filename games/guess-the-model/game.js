@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         {src: '../../eponymous/art14.jpg', model: 'Gemini'},
         {src: '../../eponymous/art15.jpg', model: 'Grok'},
         {src: '../../eponymous/art16.jpg', model: 'Deep Dream Generator'},
+        {src: '../../eponymous/art17.jpg', model: 'ChatGPT'},
     ];
 
     function shuffle(array) {
