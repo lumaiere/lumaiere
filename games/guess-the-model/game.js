@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         const imgElement = document.createElement('img');
         imgElement.src = images[index].src;
-        imgElement.classList.add('enlarged');
+        imgElement.classList.add('enlarged'); // Ensure this line is present
         imagesContainer.innerHTML = '';
         imagesContainer.appendChild(imgElement);
         document.getElementById('model-buttons').style.display = 'block';

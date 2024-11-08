@@ -31,7 +31,17 @@ body {
     border-color: blue;
 }
 
-img:hover {
+#images-container img.enlarged {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: auto;
+    z-index: 1000;
+}
+
+#images-container img:hover {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -67,7 +77,6 @@ button {
     }
 }
 
-/* Add this to your styles.css */
 .enlarged {
     position: fixed;
     top: 50%;
