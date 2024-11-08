@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 imagesHtml += `
                     <div class="result-item incorrect">
                         <img src="${img.src}" alt="Image">
-                        <div class="overlay">Incorrectly guessed!<br>It was ${img.model}</div>
+                        <div class="overlay">Incorrectly guessed!<br>Guessed: ${selectedModels[index]}</div>
                     </div>`;
             }
         });
