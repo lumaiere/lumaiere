@@ -61,15 +61,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function displayResults() {
         let correctGuesses = 0;
-        let imagesHtml = '';
+        let imagesHtml = '<div class="results-grid">';
         images.forEach((img, index) => {
             if (selectedModels[index] === img.model) {
                 correctGuesses++;
-                imagesHtml += `<div>${img.src} was made by <span style="color:green;">Correctly guessed!</span></div>`;
+                imagesHtml += `
+                    <div class="result-item correct">
+                        <img src="${img.src}" alt="Image">
+                        <div class="overlay">Correctly guessed!<br>${img.model}</div>
+                    </div>`;
             } else {
-                imagesHtml += `<div>${img.src} was made by <span style="color:red;">Incorrectly guessed. It was ${img.model}</span></div>`;
+                imagesHtml += `
+                    <div class="result-item incorrect">
+                        <img src="${img.src}" alt="Image">
+                        <div class="overlay">Incorrectly guessed!<br>It was ${img.model}</div>
+                    </div>`;
             }
         });
+        imagesHtml += '</div>';
         resultDiv.innerHTML = `You guessed ${correctGuesses} out of ${images.length} correctly!<br>${imagesHtml}`;
     }
 

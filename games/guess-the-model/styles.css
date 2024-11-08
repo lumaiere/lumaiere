@@ -95,3 +95,44 @@ button {
     display: none;
     z-index: 1001;
 }
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.result-item {
+    position: relative;
+    border: 5px solid transparent;
+}
+
+.result-item img {
+    width: 100%;
+    height: auto;
+}
+
+.result-item.correct {
+    border-color: green;
+}
+
+.result-item.incorrect {
+    border-color: red;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 10px;
+    box-sizing: border-box;
+}
