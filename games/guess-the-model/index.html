@@ -8,17 +8,17 @@
 </head>
 <body>
     <div id="game-container">
-        <h1>Guess The AI Model</h1>
+        <div id="guess-text">Guess the AI model</div>
+        <div id="images-container"></div>
+        <div id="model-buttons">
+            <button data-model="Gemini">Gemini</button>
+            <button data-model="ChatGPT">ChatGPT</button>
+            <button data-model="Grok">Grok</button>
+            <button data-model="NightCafe">NightCafe</button>
+            <button data-model="Deep Dream Generator">Deep Dream Generator</button>
+        </div>
+        <div id="result"></div>
     </div>
-    <div id="images-container"></div>
-    <div id="model-buttons">
-        <button data-model="Gemini">Gemini</button>
-        <button data-model="ChatGPT">ChatGPT</button>
-        <button data-model="Grok">Grok</button>
-        <button data-model="NightCafe">NightCafe</button>
-        <button data-model="Deep Dream Generator">Deep Dream Generator</button>
-    </div>
-    <div id="result"></div>
     <script src="game.js"></script>
 </body>
 </html>

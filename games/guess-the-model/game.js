@@ -80,6 +80,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
         imagesHtml += '</div>';
         resultDiv.innerHTML = `You guessed ${correctGuesses} out of ${images.length} correctly!<br>${imagesHtml}`;
+
+        // Hide the "Guess the AI model" text and the little image
+        const guessText = document.getElementById('guess-text');
+        const guessImage = document.getElementById('images-container');
+        if (guessText) guessText.style.display = 'none';
+        if (guessImage) guessImage.style.display = 'none';
     }
 
     function setupGame() {
