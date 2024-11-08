@@ -52,7 +52,7 @@ body {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.7); /* Green with 70% opacity */
     border: none;
     color: white;
     padding: 15px 32px;
