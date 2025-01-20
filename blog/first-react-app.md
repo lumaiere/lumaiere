@@ -37,7 +37,7 @@ function App() {
 export default App;
 ```
 
-Run `npm start` to preview your masterpiece in the browser. If it works, great—you’re halfway to fame.
+Run `npm run dev` to preview your masterpiece in the browser. If it works, great—you’re halfway to fame.
 
 ## Step 3: Prepare Your App for Production
 Time to build your app so it’s production-ready:
@@ -51,15 +51,31 @@ This creates a `build` folder containing your app’s static files.
 ## Step 4: Set Up an S3 Bucket
 1. Log in to your AWS Management Console and go to S3.
 2. Create a bucket. Give it a unique name, like `my-react-app-bucket`. (Pro tip: Avoid spaces in bucket names unless you like debugging.)
-3. Enable public access for the bucket. AWS will scold you about security, but we’ll fix that later.
-4. Upload the contents of your `build` folder to the bucket.
+3. Enable public access for the bucket via the Permissions tab. Check the 'Block Public Access' settings and disable 'Block all public access'. Then, configure your bucket policy properly. Go to your S3 bucket's permissions tab, click on 'Bucket policy,' and paste a JSON policy like this:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::your-bucket-name/*"
+    }
+  ]
+}
+```
+
+Replace `your-bucket-name` with the actual name of your bucket. This enables public read access to the objects inside while keeping the bucket itself secure.
+4. Upload the contents of your `dist` folder to the bucket.
 
 ## Step 5: Configure S3 for Static Website Hosting
 1. In your bucket settings, go to the **Properties** tab.
 2. Enable "Static website hosting."
 3. Set the index document to `index.html`.
 
-Your app is now technically live! You can grab the bucket’s website endpoint and view your app.
+Your app is now technically live! If you encounter a "403 Forbidden" error, double-check the S3 bucket permissions and ensure the files in the `dist` folder were uploaded correctly. Also, verify that the bucket policy allows public read access or use CloudFront with Origin Access Control (OAC) for secure distribution.
 
 ## Step 6: Add CloudFront for Distribution
 To make your app blazing fast and secure:
@@ -86,7 +102,7 @@ exports.handler = async (event) => {
 };
 ```
 
-4. Deploy your function and connect it to an API Gateway endpoint.
+4. Deploy your function and connect it to an API Gateway endpoint. To do this, go to the API Gateway service in the AWS Management Console, create a new HTTP API, and link it to your Lambda function. To do this, navigate to the API Gateway service in the AWS Console, select 'Create API,' and choose an HTTP API. During the creation process, select the 'Integrations' section, add a Lambda function integration, and choose your deployed function. Next, under 'Routes,' add a route (e.g., `/hello`) and connect it to the Lambda integration. Deploy the API to a stage (e.g., 'default') to get a public URL for testing.. Under 'Routes,' define a route for your endpoint (e.g., `/hello`) and map it to the Lambda integration. Deploy your API and note the endpoint URL provided. Test the URL in your browser or a tool like Postman to ensure your Lambda function responds as expected.
 
 Now your React app can call the Lambda function via the API Gateway. Fancy!
 
