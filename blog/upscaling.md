@@ -1,83 +1,111 @@
-# How I Upscaled 12 Images 10X Without Melting My Mac
+**How to Upscale 12 Images 10X on a Mac Without Breaking a Sweat (or Paying a Dime)**
 
-Look, I love a good image. You love a good image. Everyone loves a good image—except maybe my MacBook, which begins hyperventilating the moment I suggest anything more CPU-intensive than opening a spreadsheet.
+So you’ve got a dozen images—half of them `.jpg`, the other half `.webp` because the internet is chaotic like that—and you need to upscale them by 10X. Not 2X. Not 4X. Ten. You want to take a humble 500×500px image and turn it into a majestic 5000×5000px beast.
 
-So when I realized I needed to upscale 12 images by *ten freaking times*—some of them `.jpg`, some `.webp`, all of them looking like they’d been pulled from a dial-up internet connection in 2003—I braced for impact.
+Here’s the twist: you’re on a Mac, and you want to use **only** native tools. No paid apps, no shady websites that swear they’re “free” until they drop a paywall like a Marvel plot twist.
 
-Spoiler: I survived. So did my Mac. Barely. Here’s how.
+Good news. macOS ships with a surprisingly powerful secret weapon: **Preview**. Yes, the thing you use to occasionally check PDFs or that one time you accidentally opened a `.heic` file and your brain blue-screened.
 
----
-
-## The Problem: 12 Tiny Blurry Dreams
-
-I had a dozen images that looked like they were shot on a potato. Some `.jpg`, some `.webp`. And I needed them sharp. Like, **"printed on a billboard in Times Square while people squint in admiration"** sharp.
-
-But upscaling images is often code for "ruin the pixels while making them bigger." It’s like taking a small blurry dog and blowing it up into a big blurry bear. Cute? Maybe. Useful? Not at all.
-
-I needed a solution. Fast. Preferably one that didn’t require a GPU that costs more than rent.
+Let’s dive in.
 
 ---
 
-## The Secret Weapon: [Upscayl](https://github.com/upscayl/upscayl)
+### Step 1: Herd Your Cats (a.k.a. Put All Images in One Folder)
 
-Enter **[Upscayl](https://github.com/upscayl/upscayl)**, the free, open-source desktop app built specifically to upscale images using AI. It's like the Photoshop of the future but without the Adobe price tag and popups begging you to try Lightroom.
+Drop your 12 images—`.jpg`, `.webp`, `.whatever`—into a single folder. Desktop, Documents, "Misc Stuff I’ll Organize Later"—doesn’t matter. Just round them up.
 
-Even better—it works on **macOS**, **Windows**, and **Linux**, so no one’s left out (not even you, weird Arch Linux guy).
+If your `.webp` images are acting like they don’t want to hang with the rest, you might need to convert them. You can do this in Preview too:
 
-Download it. Open it. Select a folder. Click a button. Watch magic happen. Upscayl turns sad little images into glorious, hi-res, ultra-crisp masterpieces.
+1. Right-click a `.webp` → Open With → Preview.
+2. File → Export → Select **JPEG** → Save.
 
----
-
-## The Actual Process (aka "What I Did Instead of Crying")
-
-1. **Download Upscayl** from the [official GitHub releases page](https://github.com/upscayl/upscayl/releases). Pick the macOS `.dmg` file if you’re rocking Apple silicon like me.
-
-2. **Install it** like a civilized person (drag to Applications).
-
-3. **Open Upscayl** and immediately forgive it for not having the prettiest interface. We’re here for function, not fashion.
-
-4. Select **“Batch Upscale”**.
-
-5. Dump all 12 images (yep, `.webp` too) into one folder and point Upscayl at it.
-
-6. Choose the **“Real-ESRGAN 4x Plus”** model. Then hit the “Upscale” button *twice*—because 4x + 4x = 16x, which is basically 10x but with more pizzazz.
-
-7. **Wait**. Not long. Maybe enough time to make a cup of tea, question your life choices, and come back.
-
-8. Bask in the glory of your crisp, dreamy 10X images.
+Congratulations, your `.webp` is now less weird.
 
 ---
 
-## Pro Tips (Because I Learned These the Hard Way)
+### Step 2: Select All the Images and Open in Preview
 
-- **.webp is accepted!** You don’t need to convert them first. Upscayl treats `.webp` and `.jpg` with equal respect, like a true digital diplomat.
+Highlight all 12 images, right-click → Open With → Preview.
 
-- If you want **exactly** 10X upscaling, you can always do one 4x pass, then another 2.5x using a different tool like [BigJPG](https://bigjpg.com/)—but honestly, the double 4x pass is so sharp you might not care about the math.
-
-- Don’t try to use this while running a 74-tab Chrome session, Blender, and a Zoom call with your boss. Your Mac will emit a sound you’ve never heard before, and it might be a cry for help.
+Now pause and take a moment to marvel at how Preview just accepted all 12 like a chill bouncer at an exclusive club.
 
 ---
 
-## Why I Love Upscayl (And Why You Might Too)
+### Step 3: Enter the Matrix (a.k.a. Thumbnails Sidebar)
 
-- It’s free.
-- It’s fast.
-- It supports batch processing.
-- It doesn’t roast your CPU like a rotisserie chicken.
-- The results are *chef’s kiss* level.
+In Preview, make sure the **thumbnails sidebar** is visible on the left (View → Thumbnails). If not, you’ll be resizing one image at a time like some kind of digital peasant.
 
-Seriously, I compared it to several paid upscalers and Upscayl held its own like a budget action hero in a Marvel movie. You think it’ll die in Act I, but nope—by the end, it’s carrying the franchise.
+Click any thumbnail, then press `Command + A` to select all images in the sidebar.
 
 ---
 
-## Go Try It. Then Come Back and Tell Me Your Glorious Wins.
+### Step 4: Open the Secret Resize Portal
 
-Got questions? Got results? Got a Mac that spontaneously combusted in protest? Drop a comment.
+With all 12 thumbnails selected:
 
-And hey—if this was helpful or at least gave you a chuckle while your image was rendering, **follow me**. I’m always doing weird, semi-useful, slightly chaotic tech experiments and oversharing the results.
+- Go to **Tools** → **Adjust Size...**
+
+Now you’re in the resizing cockpit. Strap in.
 
 ---
 
-**Art Prompt:**
+### Step 5: Crank It to 10X
 
-An ethereal garden scene at sunrise, featuring shimmering water lilies on a quiet pond. Use soft, feathery brush strokes reminiscent of early French Impressionism. Mist hovers low across the surface, with dappled light filtering through delicate willow branches. The colors should feel dreamlike—pastels and pale golds with hints of lavender. Focus on atmosphere and light play, avoiding hard edges. Capture movement in the water and leaves, as if everything is gently stirring awake.
+Here’s the trick: in the size window:
+
+- Make sure **“Scale proportionally”** is checked.
+- Uncheck **“Resample image”**, then recheck it. (I don’t know why, it just makes Preview behave. Trust the ritual.)
+- If your images are originally, say, 1000px wide, change the **width** to 10,000px.
+- The height will auto-adjust, unless you’ve decided to live dangerously and unchecked proportional scaling. (Don’t.)
+
+Hit **OK**.
+
+Boom. All 12 images just got the digital equivalent of a protein shake and 6 months at the gym.
+
+---
+
+### Step 6: Save Your Masterpieces
+
+Now go to **File → Save All** or, if you’re feeling dramatic, close the window and click **Save** when it prompts you.
+
+That's it. You’ve just scaled 12 images to 10X using nothing but Preview, pure willpower, and zero dollars.
+
+---
+
+### Bonus Round: Batch Rename Like a Boss
+
+Want your images to be named something like `Upscaled-01.jpg`, `Upscaled-02.jpg`, etc.?
+
+1. Select all images in Finder.
+2. Right-click → Rename X items → Format.
+3. Use “Name and Index” or “Name and Counter” depending on your vibe.
+4. Enter something like `Upscaled` and start from 01.
+
+Now your folder looks like you actually know what you're doing.
+
+---
+
+### In Case You’re Wondering: Why Not Use [This AI Tool]?
+
+Because sometimes you don’t want to upload 12 images, wait forever, find out the free tier only does 3, and then get spammed by emails about upgrading to Premium Ultra Mega Platinum.
+
+Preview. Is. Enough.
+
+---
+
+### Want to Upscale Even More Images?
+
+You can also use **Automator** (also native on macOS) for batching, or dive into **Shortcuts** if you like your resizing with a side of programmable flair. But that’s another blog post (or another rabbit hole, depending on your energy level).
+
+---
+
+### Tell Me Things
+
+Did this work for you? Did Preview betray you mid-resize? Do you secretly love `.webp` and want to start a support group?
+
+Drop a comment and let’s talk. And if you liked this guide, follow me—I do this kind of thing more often than I update my macOS (which is both frequent and mildly terrifying).
+
+---
+
+**Art Prompt:**  
+A soft-focus riverside scene at dusk, painted in gentle, swirling brush strokes reminiscent of Monet’s late works. The sky glows with pink and lavender hues reflected on rippling water, dotted with small boats drifting lazily. In the foreground, reeds and lilies blur into the water with hazy texture, while tall trees on the opposite bank dissolve into the mist. Emphasize light and shadow interplay, with visible brushwork and an impression of tranquility rather than detail. Impressionist style, oil on canvas, 19th century.
