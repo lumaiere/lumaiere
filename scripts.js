@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const galleryType = urlParams.get('gallery') || 'main';
     if (galleryType === 'video') {
         loadVideoClipGallery();
+    } else {
+        loadInitialImage();
+        requestAnimationFrame(loadArtFiles);
     }
 
 
@@ -273,9 +276,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 img.style.transform = 'translate(-50%, -50%)'; // Center both horizontally and vertically
             }
         }
-
-        loadInitialImage();
-        requestAnimationFrame(loadArtFiles);
 
         // Event listeners for arrow keys
         document.addEventListener('keydown', function (event) {
