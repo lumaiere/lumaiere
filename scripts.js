@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const artDisplay = document.getElementById("art-display");
     const galleryView = document.getElementById("gallery-view");
-    const galleryLinks = document.getElementById("gallery-links");
-    const promptMagicGallery = document.getElementById("prompt-magic-gallery");
+        const promptMagicGallery = document.getElementById("prompt-magic-gallery");
     const fullscreenPopup = document.getElementById("fullscreen-popup");
     const popupImage = document.getElementById("popup-image");
     const closePopup = document.querySelector(".close-popup");
@@ -16,6 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const urlParams = new URLSearchParams(window.location.search);
     const galleryType = urlParams.get('gallery') || 'main';
+    if (galleryType === 'video') {
+        loadVideoClipGallery();
+    }
+
 
     const promptMagicFiles = [
         "a barber", "a clown", "a dolphin", "a man", "a woman", "a priest", "a rabbi", "an Imam",
@@ -318,4 +321,36 @@ document.addEventListener("DOMContentLoaded", function () {
             startX = 0; // Reset startX
         });
     }
+
+    function loadVideoClipGallery() {
+        const maxClips = 100;
+        const clipFiles = [];
+        for (let i = 1; i <= maxClips; i++) {
+            clipFiles.push(`videos/clip${i}.mp4`);
+        }
+
+        const videoGallery = document.getElementById('video-gallery');
+        videoGallery.innerHTML = '';
+
+        clipFiles.forEach(src => {
+            fetch(src, { method: 'HEAD' }).then(res => {
+                if (res.ok) {
+                    const video = document.createElement('video');
+                    video.src = src;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = true;
+                    video.playsInline = true;
+                    video.setAttribute('controls', '');
+                    videoGallery.appendChild(video);
+                }
+            }).catch(() => {});
+        });
+
+        videoGallery.classList.remove('hidden');
+        artDisplay.style.display = 'none';
+        galleryView.style.display = 'none';
+        promptMagicGallery.style.display = 'none';
+    }
+
 });
