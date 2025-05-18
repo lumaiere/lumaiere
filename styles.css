@@ -158,7 +158,8 @@ header p {
     display: block;
     width: 100vw;
     height: 100vh;
-    object-fit: cover;
+    object-fit: contain;
+    background: #000;
     margin: 0 auto;
 }
 

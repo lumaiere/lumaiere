@@ -363,6 +363,24 @@ document.addEventListener("DOMContentLoaded", function () {
             if (videoGallery.firstChild) {
                 videoGallery.firstChild.scrollIntoView({ behavior: 'auto' });
             }
+            // Add looping scroll behavior
+            videoGallery.addEventListener('scroll', function () {
+                const videos = videoGallery.querySelectorAll('video');
+                if (videos.length === 0) return;
+
+                const firstRect = videos[0].getBoundingClientRect();
+                const lastRect = videos[videos.length - 1].getBoundingClientRect();
+                const galleryRect = videoGallery.getBoundingClientRect();
+
+                // If scrolled above the first video, jump to last
+                if (firstRect.top >= galleryRect.top + 20) {
+                    videos[videos.length - 1].scrollIntoView({ behavior: 'auto' });
+                }
+                // If scrolled below the last video, jump to first
+                if (lastRect.bottom <= galleryRect.bottom - 20) {
+                    videos[0].scrollIntoView({ behavior: 'auto' });
+                }
+            });
         }, 500);
     }
 
