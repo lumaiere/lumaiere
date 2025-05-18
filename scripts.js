@@ -368,17 +368,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 const videos = videoGallery.querySelectorAll('video');
                 if (videos.length === 0) return;
 
-                const firstRect = videos[0].getBoundingClientRect();
-                const lastRect = videos[videos.length - 1].getBoundingClientRect();
-                const galleryRect = videoGallery.getBoundingClientRect();
-
-                // If scrolled above the first video, jump to last
-                if (firstRect.top >= galleryRect.top + 20) {
+                // If at the very top, jump to last video
+                if (videoGallery.scrollTop === 0) {
                     videos[videos.length - 1].scrollIntoView({ behavior: 'auto' });
+                    return;
                 }
-                // If scrolled below the last video, jump to first
-                if (lastRect.bottom <= galleryRect.bottom - 20) {
+
+                // If at the very bottom, jump to first video
+                if (videoGallery.scrollHeight - videoGallery.scrollTop === videoGallery.clientHeight) {
                     videos[0].scrollIntoView({ behavior: 'auto' });
+                    return;
                 }
             });
         }, 500);
