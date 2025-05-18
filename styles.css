@@ -150,19 +150,24 @@ header p {
 }
 
 .video-gallery {
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    -webkit-overflow-scrolling: touch;
+    min-height: 100vh;
+    background: #000;
 }
 
 .video-gallery video {
-    width: 100%;
+    display: block;
+    width: 100vw;
     height: 100vh;
     object-fit: cover;
-    scroll-snap-align: start;
+    margin: 0 auto;
 }
 
 .hidden {
     display: none;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }

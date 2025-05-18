@@ -332,6 +332,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const videoGallery = document.getElementById('video-gallery');
         videoGallery.innerHTML = '';
 
+        let firstVideo = null;
+        let videoCount = 0;
+
         clipFiles.forEach(src => {
             fetch(src, { method: 'HEAD' }).then(res => {
                 if (res.ok) {
@@ -343,6 +346,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     video.playsInline = true;
                     video.setAttribute('controls', '');
                     videoGallery.appendChild(video);
+                    if (!firstVideo) firstVideo = video;
+                    videoCount++;
                 }
             }).catch(() => {});
         });
@@ -351,6 +356,14 @@ document.addEventListener("DOMContentLoaded", function () {
         artDisplay.style.display = 'none';
         galleryView.style.display = 'none';
         promptMagicGallery.style.display = 'none';
+
+        // Scroll to top and ensure first video is visible after a short delay
+        window.scrollTo(0, 0);
+        setTimeout(() => {
+            if (videoGallery.firstChild) {
+                videoGallery.firstChild.scrollIntoView({ behavior: 'auto' });
+            }
+        }, 500);
     }
 
 });
