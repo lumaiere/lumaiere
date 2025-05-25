@@ -374,7 +374,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 // If at the very bottom, jump to first video
                 if (videoGallery.scrollHeight - videoGallery.scrollTop === videoGallery.clientHeight) {
                     videos[0].scrollIntoView({ behavior: 'auto' });
-                    return;
                 }
             });
         }, 500);
