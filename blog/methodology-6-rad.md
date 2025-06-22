@@ -106,13 +106,13 @@ Tidbits to Drop at Parties
 - RAD is secretly what most side projects use, even when the dev pretends they’re “doing Agile.”
 
 Art Prompt:  
-A surrealist dreamscape inspired by Salvador Dalí. A distorted, semi-melted prototype app interface hovers over a desert of floating clocks and wireframe structures. Vivid cerulean and coral hues swirl through the sky as human figures with typewriter heads collaborate on digital canvases. The brushwork is sharp and uncanny, evoking both urgency and creative madness. The atmosphere is one of fleeting genius—a moment of innovation suspended in the ether.
+A Cubist exploration of fragmentation and abstraction inspired by Georges Braque. Angular planes intersect in muted olive, ochre, and slate hues, forming overlapping instruments and shadowed furniture in a fractured domestic interior. The composition shifts perspective across every surface, inviting the viewer to decode a world built from puzzle-like shards. The brushwork is deliberate, the palette earthy and intellectual, evoking a quiet, analytical mood.
 
 Video Prompt:  
-Begin with a fast zoom into a glitchy wireframe prototype flickering to life in a digital desert. Cut to surreal transitions: melting UI panels, spinning gears with keyboard keys, bursts of color flowing as figures sketch on floating tablets. The camera follows ideas as they morph, merge, and deploy with a flourish. Quick pace, erratic cuts, and visual echoes of Dalí’s dripping time and Meta’s design system clashing on caffeine.
+Open with rapid cuts between fractured shapes assembling into a recognizable scene—a violin, a chair, a table—then disassemble and morph into geometric abstractions. Camera pans glide sideways, then break and pivot as the scene folds inward. Transitions slice like broken glass, with soft bursts of ochre and slate unfolding across a shifting cubist dreamscape. Pace is cerebral, elegant, and hypnotic.
 
 Songs to Pair With the Video:  
-- “Genesis” by Armors  
-- “Surface” by Aero Flynn
+- “Alap” by Talvin Singh  
+- “We Move Lightly” by Dustin O’Halloran
 
-Drop your thoughts below—have you RAD-ed something recently? Love it? Hate it? Still recovering? Let’s talk. And don’t forget to follow for Episode 7: **Extreme Programming – Code Like You Mean It**.
+Drop your thoughts below—have you RAD-ed something recently? Love it? Hate it? Still recovering? Let’s talk. And don’t forget to follow for Episode 7: **Extreme Programming – Code Like You Mean It**
