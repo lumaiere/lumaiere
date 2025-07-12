@@ -302,8 +302,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- End of gallery-related function definitions ---
 
     // --- Only keep the logic that chooses which gallery to show in the if/else block ---
-    if (galleryType === 'video') {
-        loadVideoClipGallery();
+    if (galleryType.startsWith('video')) {
+        loadVideoClipGallery(galleryType);
     } else if (galleryType === 'prompt-magic') {
         // Hide other galleries, show Prompt Magic gallery
         artDisplay.style.display = 'none';
@@ -319,11 +319,13 @@ document.addEventListener("DOMContentLoaded", function () {
         requestAnimationFrame(loadArtFiles);
     }
 
-    function loadVideoClipGallery() {
+    function loadVideoClipGallery(galleryType) {
         const maxClips = 100;
         const clipFiles = [];
+        videoDir = galleryType;
+        
         for (let i = 1; i <= maxClips; i++) {
-            clipFiles.push(`videos/clip${i}.mp4`);
+            clipFiles.push(`${videoDir}/clip${i}.mp4`);
         }
 
         const videoGallery = document.getElementById('video-gallery');
