@@ -1,4 +1,4 @@
-Web3 Storage and Indexing: Where Your NFTs Actually Live (And How Apps Find Them)
+# Web3 Storage and Indexing: Where Your NFTs Actually Live (And How Apps Find Them)
 
 If Web3 were a city, blockchains would be the courthouse: public, tamper-evident, and a little too serious.
 
@@ -368,11 +368,11 @@ Drop your experiences, questions, and spicy Web3 takes in the comments—and hit
 
 ---
 
-**Art Prompt (Abstract Expressionism):**
+**[Art Prompt (Abstract Expressionism):](https://lumaiere.com/?gallery=abstract-expressionism2)**
 
 A large vertical canvas dominated by drifting rectangles of deep crimson, burnt orange, and smoky violet, softly stacked like hovering clouds of color, their edges blurred as if they’re gently dissolving into one another; a subtle field of midnight blue hums beneath the surface, occasionally peeking through in thin, luminous seams, while delicate drips and translucent washes accumulate toward the bottom, hinting at gravity and time; the overall composition feels meditative yet intense, as if the colors themselves are quietly arguing, with glowing light at the center slowly pulsing outward, inviting the viewer into a calm, contemplative haze.
 
-**Video Prompt:**
+**[Video Prompt:](https://www.tiktok.com/@davelumai/video/7573128726632811806)**
 
 Explode straight into a close view of glowing color fields blossoming across a vertical canvas, as blocks of crimson, burnt orange, and smoky violet fade in and out, gently sliding past each other in slow, organic waves; let subtle drips of paint appear and stretch downward in real time, as if gravity is softly tugging at them, while a faint underlayer of midnight blue flickers through thin cracks and seams; have the colors breathe—brightening, dimming, and shifting position with each beat—so the whole frame feels like a living, meditative storm of pigment that loops seamlessly, leaving viewers with the sense of standing inches away from a massive, softly humming wall of light.
 
@@ -382,23 +382,6 @@ Explode straight into a close view of glowing color fields blossoming across a v
 * *Believe In Me – Flamingosis*
 
 If you try this combo—art, motion, and music—post a link and tell everyone how it turned out… and don’t forget to follow for more experiments in the beautiful mess where code, art, and Web3 collide.
-
-```text
-A large vertical canvas dominated by drifting rectangles of deep crimson, burnt orange, and smoky violet, softly stacked like hovering clouds of color, their edges blurred as if they’re gently dissolving into one another; a subtle field of midnight blue hums beneath the surface, occasionally peeking through in thin, luminous seams, while delicate drips and translucent washes accumulate toward the bottom, hinting at gravity and time; the overall composition feels meditative yet intense, as if the colors themselves are quietly arguing, with glowing light at the center slowly pulsing outward, inviting the viewer into a calm, contemplative haze.
-```
-
-```text
-Explode straight into a close view of glowing color fields blossoming across a vertical canvas, as blocks of crimson, burnt orange, and smoky violet fade in and out, gently sliding past each other in slow, organic waves; let subtle drips of paint appear and stretch downward in real time, as if gravity is softly tugging at them, while a faint underlayer of midnight blue flickers through thin cracks and seams; have the colors breathe—brightening, dimming, and shifting position with each beat—so the whole frame feels like a living, meditative storm of pigment that loops seamlessly, leaving viewers with the sense of standing inches away from a massive, softly humming wall of light.
-```
-
-```text
-Infinite Echoes in Crimson Light
-```
-
-```text
-Show Me How – Men I Trust
-Believe In Me – Flamingosis
-```
 
 [1]: https://en.wikipedia.org/wiki/InterPlanetary_File_System?utm_source=chatgpt.com "InterPlanetary File System"
 [2]: https://filebase.com/blog/ipfs-content-addressing-explained/?utm_source=chatgpt.com "IPFS: Content Addressing Explained"
